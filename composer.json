@@ -1,0 +1,28 @@
+{
+    "name": "proesio/escrud",
+    "description": "Escrud - CRUD en Español.",
+    "type": "project",
+    "keywords": [
+        "escrud",
+        "crud",
+        "database"
+    ],
+    "license": "MIT",
+    "homepage": "https://escrud.proes.tk",
+    "authors": [
+        {
+            "name": "Juan Felipe Valencia Murillo",
+            "email": "juanfe0245@gmail.com",
+            "homepage": "https://jfvalenciam.proes.tk",
+            "role": "Desarrollador"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "proesio/pipe": "^4.2"
+    },
+    "autoload": {
+        "files": ["proesio/escrud/escrud.php"]
+    },
+    "minimum-stability": "dev"
+}
