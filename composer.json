@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": ">=7.2.0",
-        "proesio/pipe": "^4.2"
+        "proesio/pipe": "^4"
     },
     "autoload": {
         "files": ["proesio/escrud/escrud.php"]
