@@ -2,8 +2,8 @@
 /*
  * Autor: Juan Felipe Valencia Murillo
  * Fecha inicio de creación: 31-05-2020
- * Fecha última modificación: 27-08-2020
- * Versión: 1.1.0
+ * Fecha última modificación: 10-09-2020
+ * Versión: 1.2.0
  * Sitio web: https://escrud.proes.tk
  *
  * Copyright (C) 2020 Juan Felipe Valencia Murillo <juanfe0245@gmail.com>
@@ -61,7 +61,7 @@ use function Escrud\Funciones\obtenerCasillaEncabezado;
 $peticion = file_get_contents('php://input');
 $peticion = json_decode($peticion);
 $peticion->textos = (array) $peticion->textos;
-$peticion->registros=asignarIdRegistros($peticion->registros);
+$peticion->registros = asignarIdRegistros($peticion->registros);
 
 if(!empty($peticion->busqueda)){
 	$peticion->registros = obtenerFiltroBuscador($peticion);

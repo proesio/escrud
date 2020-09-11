@@ -2,8 +2,8 @@
 /*
  * Autor: Juan Felipe Valencia Murillo
  * Fecha inicio de creación: 31-05-2020
- * Fecha última modificación: 27-08-2020
- * Versión: 1.1.0
+ * Fecha última modificación: 10-09-2020
+ * Versión: 1.2.0
  * Sitio web: https://escrud.proes.tk
  *
  * Copyright (C) 2020 Juan Felipe Valencia Murillo <juanfe0245@gmail.com>
@@ -57,42 +57,52 @@ use function Escrud\Funciones\obtenerPaginado;
 class CRUD{
     
     /*
-    * Datos de la petición realizada.
-    * @tipo object|null
-    */
+     * Datos de la petición realizada.
+     *
+     * @tipo object|null
+     */
     private $peticion = null;
     
     /*
-    * Crea una nueva instancia de la clase CRUD.
-    *
-    * @parametro object $peticion
-    * @retorno void
-    */
+     * Crea una nueva instancia de la clase CRUD.
+     *
+     * @parametro object $peticion
+     * @retorno void
+     */
     public function __construct($peticion){
         $peticion->config = json_decode($peticion->config, true);
+        $peticion->atributos = json_decode($peticion->atributos, true);
         $this->peticion = $peticion;
         $this->inicializarPIPE($peticion->config);
     }
     
     /*
-    * Obtiene los registros de la tabla especificada.
-    *
-    * @retorno json
-    */
+     * Obtiene los registros de la tabla especificada.
+     *
+     * @retorno json
+     */
     public function obtenerRegistros(){
-        $registros = PIPE::tabla($this->peticion->config['BD_TABLA'])->todo();
+        $pipe = PIPE::tabla($this->peticion->config['BD_TABLA']);
+        $ordenes = $this->peticion->atributos['ordenarPor'];
+        if(is_array($ordenes) && !empty($ordenes))
+            $pipe->ordenarPor($ordenes['ordenes'], $ordenes['tipo']);
+        $registros = $pipe->todo();
         $respuesta['estado'] = 'exito';
         $respuesta['datos'] = $registros;
         return json_encode($respuesta);
     }
     
     /*
-    * Obtiene un registro de la tabla especificada.
-    *
-    * @retorno json
-    */
+     * Obtiene un registro de la tabla especificada.
+     *
+     * @retorno json
+     */
     public function obtenerRegistro(){
-        $registros = PIPE::tabla($this->peticion->config['BD_TABLA'])->todo();
+        $pipe = PIPE::tabla($this->peticion->config['BD_TABLA']);
+        $ordenes = $this->peticion->atributos['ordenarPor'];
+        if(is_array($ordenes) && !empty($ordenes))
+            $pipe->ordenarPor($ordenes['ordenes'], $ordenes['tipo']);
+        $registros = $pipe->todo();
         $registro = null;
         foreach($registros as $clave => $registroPivote){
             if($this->peticion->registroId == $clave){
@@ -106,10 +116,10 @@ class CRUD{
     }
     
     /*
-    * Crea un nuevo registro en la tabla especificada.
-    *
-    * @retorno json
-    */
+     * Crea un nuevo registro en la tabla especificada.
+     *
+     * @retorno json
+     */
     public function crear(){
         $registro = json_decode($this->peticion->registro, true);
         $insercion = PIPE::tabla($this->peticion->config['BD_TABLA'])->insertar($registro);
@@ -118,10 +128,10 @@ class CRUD{
     }
     
     /*
-    * Edita un registro en la tabla especificada.
-    *
-    * @retorno json
-    */
+     * Edita un registro en la tabla especificada.
+     *
+     * @retorno json
+     */
     public function editar(){
         $registro = PIPE::tabla($this->peticion->config['BD_TABLA'])
             ->encontrar($this->peticion->valorLlavePrimaria, $this->peticion->llavePrimaria);
@@ -131,10 +141,10 @@ class CRUD{
     }
     
     /*
-    * Elimina un registro en la tabla especificada.
-    *
-    * @retorno json
-    */
+     * Elimina un registro en la tabla especificada.
+     *
+     * @retorno json
+     */
     public function eliminar(){
         $registro = PIPE::tabla($this->peticion->config['BD_TABLA'])
             ->encontrar($this->peticion->valorLlavePrimaria, $this->peticion->llavePrimaria);
@@ -144,10 +154,10 @@ class CRUD{
     }
     
     /*
-    * Obtiene el paginado automático según los registros de la tabla.
-    *
-    * @retorno json
-    */
+     * Obtiene el paginado automático según los registros de la tabla.
+     *
+     * @retorno json
+     */
     public function obtenerPaginado(){
         $registros = PIPE::tabla($this->peticion->config['BD_TABLA'])->todo();
         $paginado = obtenerPaginado($registros);
@@ -158,11 +168,11 @@ class CRUD{
     
     //Inicio métodos privados.
     /*
-    * Inicializa la configuración del ORM PIPE.
-    *
-    * @parametro array $config
-    * @retorno void
-    */
+     * Inicializa la configuración del ORM PIPE.
+     *
+     * @parametro array $config
+     * @retorno void
+     */
     private function inicializarPIPE($config){
         Configuracion::inicializar([
             'BD_CONTROLADOR' => $config['BD_CONTROLADOR'] ?? null,

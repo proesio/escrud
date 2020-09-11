@@ -2,8 +2,8 @@
 /*
  * Autor: Juan Felipe Valencia Murillo
  * Fecha inicio de creación: 31-05-2020
- * Fecha última modificación: 27-08-2020
- * Versión: 1.1.0
+ * Fecha última modificación: 10-09-2020
+ * Versión: 1.2.0
  * Sitio web: https://escrud.proes.tk
  *
  * Copyright (C) 2020 Juan Felipe Valencia Murillo <juanfe0245@gmail.com>
@@ -53,25 +53,26 @@ namespace Escrud\Clases;
 class Texto{
     
     /*
-    * Textos según el idioma establecido.
-    * @tipo array
-    */
+     * Textos según el idioma establecido.
+     *
+     * @tipo array
+     */
     public static $textos = [];
     
     /*
-    * Crea una nueva instancia de la clase Texto.
-    *
-    * @retorno void
-    */
+     * Crea una nueva instancia de la clase Texto.
+     *
+     * @retorno void
+     */
     public function __construct(){
         $this->asignarTextos();
     }
     
     /*
-    * Asigna los textos según el idioma establecido.
-    *
-    * @retorno void
-    */
+     * Asigna los textos según el idioma establecido.
+     *
+     * @retorno void
+     */
     public function asignarTextos(){
         $idioma = Configuracion::obtenerVariable('IDIOMA');
         if($idioma){
@@ -93,10 +94,10 @@ class Texto{
     }
     
     /*
-    * Obtiene los textos según el idioma establecido.
-    *
-    * @retorno json
-    */
+     * Obtiene los textos según el idioma establecido.
+     *
+     * @retorno json
+     */
     public static function obtenerTextos(){
         $textos = json_encode(self::$textos);
         return $textos;

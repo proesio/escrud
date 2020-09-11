@@ -2,8 +2,8 @@
 /*
  * Autor: Juan Felipe Valencia Murillo
  * Fecha inicio de creación: 31-05-2020
- * Fecha última modificación: 27-08-2020
- * Versión: 1.1.0
+ * Fecha última modificación: 10-09-2020
+ * Versión: 1.2.0
  * Sitio web: https://escrud.proes.tk
  *
  * Copyright (C) 2020 Juan Felipe Valencia Murillo <juanfe0245@gmail.com>
@@ -55,23 +55,25 @@ use PIPE\Clases\Configuracion as PIPEConfig;
 class Configuracion{
     
     /*
-    * Indica el id del elemento HTML.
-    * @tipo int
-    */
+     * Indica el id del elemento HTML.
+     *
+     * @tipo int
+     */
     public static $elementoId = 0;
     
     /*
-    * Configuración de la herramienta Escrud.
-    * @tipo array
-    */
+     * Configuración de la herramienta Escrud.
+     *
+     * @tipo array
+     */
     private static $config = [];
     
     /*
-    * Inicializa la configuración de la herramienta Escrud.
-    *
-    * @parametro array $config
-    * @retorno void
-    */
+     * Inicializa la configuración de la herramienta Escrud.
+     *
+     * @parametro array $config
+     * @retorno void
+     */
     public static function inicializar($config = []){
         self::$config = $config;
         self::incluirArchivos();
@@ -79,11 +81,11 @@ class Configuracion{
     }
     
     /*
-    * Obtiene una variable de la configuración de la herramienta Escrud.
-    *
-    * @parametro string $variable
-    * @retorno string|null
-    */
+     * Obtiene una variable de la configuración de la herramienta Escrud.
+     *
+     * @parametro string $variable
+     * @retorno string|null
+     */
     public static function obtenerVariable($variable){
         $valor = array_key_exists($variable, self::$config)
             && !empty(self::$config[$variable]) 
@@ -93,10 +95,10 @@ class Configuracion{
     
     //Inicio métodos privados.
     /*
-    * Inicializa la configuración del ORM PIPE.
-    *
-    * @retorno void
-    */
+     * Inicializa la configuración del ORM PIPE.
+     *
+     * @retorno void
+     */
     private static function inicializarPIPE(){
         PIPEConfig::inicializar([
             'BD_CONTROLADOR' => self::$config['BD_CONTROLADOR'] ?? null,
@@ -112,13 +114,14 @@ class Configuracion{
     }
     
     /*
-    * Incluye los archivos de la herramienta Escrud.
-    *
-    * @retorno void
-    */
+     * Incluye los archivos de la herramienta Escrud.
+     *
+     * @retorno void
+     */
     private static function incluirArchivos(){
         $entorno = require __DIR__.'/../Entorno/entorno.php';
         require_once $entorno['RUTA_VENDOR'];
+        require_once __DIR__.'/../Funciones/tabla.php';
         require_once 'HTML.php';
         require_once 'Escrud.php';
         require_once 'Texto.php';
@@ -127,10 +130,10 @@ class Configuracion{
     }
     
     /*
-    * Instancia las clases al inicio de la configuración.
-    *
-    * @retorno void
-    */
+     * Instancia las clases al inicio de la configuración.
+     *
+     * @retorno void
+     */
     private static function instanciarClases(){
         new Texto();
     }

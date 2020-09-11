@@ -1,8 +1,8 @@
 /*
  * Autor: Juan Felipe Valencia Murillo
  * Fecha inicio de creación: 31-05-2020
- * Fecha última modificación: 27-08-2020
- * Versión: 1.1.0
+ * Fecha última modificación: 10-09-2020
+ * Versión: 1.2.0
  * Sitio web: https://escrud.proes.tk
  *
  * Copyright (C) 2020 Juan Felipe Valencia Murillo <juanfe0245@gmail.com>
@@ -56,7 +56,8 @@
 function obtenerRegistros(datos){
   datosPeticion = convertirJsonAUrl({
     api: 'registros-obtener',
-    config: JSON.stringify(datos.config)
+    config: JSON.stringify(datos.config),
+    atributos: JSON.stringify(datos.atributos)
   });
   let url = `${datos.config.ENTORNO.URL_BASE}Peticiones/crud.php?${datosPeticion}`;
   return new Promise((respuesta) => {
@@ -81,7 +82,8 @@ function obtenerRegistro(datos){
   datosPeticion = convertirJsonAUrl({
     api: 'registro-obtener',
     registroId: datos.registroId,
-    config: JSON.stringify(datos.config)
+    config: JSON.stringify(datos.config),
+    atributos: JSON.stringify(datos.atributos)
   });
   let url = `${datos.config.ENTORNO.URL_BASE}Peticiones/crud.php?${datosPeticion}`;
   return new Promise((respuesta) => {
@@ -105,7 +107,8 @@ function obtenerRegistro(datos){
 function obtenerPaginado(datos){
   datosPeticion = convertirJsonAUrl({
     api: 'paginado-obtener',
-    config: JSON.stringify(datos.config)
+    config: JSON.stringify(datos.config),
+    atributos: JSON.stringify(datos.atributos)
   });
   let url = `${datos.config.ENTORNO.URL_BASE}Peticiones/crud.php?${datosPeticion}`;
   return new Promise((respuesta) => {

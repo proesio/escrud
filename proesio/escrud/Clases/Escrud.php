@@ -2,8 +2,8 @@
 /*
  * Autor: Juan Felipe Valencia Murillo
  * Fecha inicio de creación: 31-05-2020
- * Fecha última modificación: 27-08-2020
- * Versión: 1.1.0
+ * Fecha última modificación: 10-09-2020
+ * Versión: 1.2.0
  * Sitio web: https://escrud.proes.tk
  *
  * Copyright (C) 2020 Juan Felipe Valencia Murillo <juanfe0245@gmail.com>
@@ -53,23 +53,25 @@ namespace Escrud\Clases;
 abstract class Escrud{
     
     /*
-    * Autor de la herramienta Escrud.
-    * @tipo string
-    */
+     * Autor de la herramienta Escrud.
+     *
+     * @tipo string
+     */
     const AUTOR = 'Juan Felipe Valencia Murillo';
     
     /*
-    * Versión actual de la herramienta Escrud.
-    * @tipo string
-    */
-    const VERSION = '1.1.0';
+     * Versión actual de la herramienta Escrud.
+     *
+     * @tipo string
+     */
+    const VERSION = '1.2.0';
     
     /*
-    * Crea una instancia de la clase HTML con el nombre de la tabla.
-    *
-    * @parametro string $tabla
-    * @retorno \Escrud\Clases\HTML
-    */
+     * Crea una instancia de la clase HTML con el nombre de la tabla.
+     *
+     * @parametro string $tabla
+     * @retorno \Escrud\Clases\HTML
+     */
     public static function tabla($tabla){
         return new HTML($tabla);
     }

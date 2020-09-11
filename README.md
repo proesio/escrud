@@ -19,7 +19,7 @@ Escrud - CRUD en Español es una herramienta que genera automáticamente una int
 
 - [Instalación](https://escrud.proes.tk/documentacion/1.x/instalacion/).
 - [Configuración](https://escrud.proes.tk/documentacion/1.x/configuracion/).
-- [Convensiones](https://escrud.proes.tk/documentacion/1.x/convenciones/).
+- [Convenciones](https://escrud.proes.tk/documentacion/1.x/convenciones/).
 - [Implementación](https://escrud.proes.tk/documentacion/1.x/implementacion/).
 
 ## Licencia

@@ -2,8 +2,8 @@
 /*
  * Autor: Juan Felipe Valencia Murillo
  * Fecha inicio de creación: 31-05-2020
- * Fecha última modificación: 27-08-2020
- * Versión: 1.1.0
+ * Fecha última modificación: 10-09-2020
+ * Versión: 1.2.0
  * Sitio web: https://escrud.proes.tk
  *
  * Copyright (C) 2020 Juan Felipe Valencia Murillo <juanfe0245@gmail.com>
@@ -51,81 +51,100 @@
 namespace Escrud\Clases;
 
 use PIPE\Clases\PIPE;
+use function Escrud\Funciones\obtenerPaginado;
 
 class HTML{
     
     /*
-    * Indica el id del elemento HTML.
-    * @tipo int
-    */
+     * Indica el id del elemento HTML.
+     *
+     * @tipo int
+     */
     private $elementoId = 0;
     
     /*
-    * Nombre de la tabla en la base de datos.
-    * @tipo string
-    */
+     * Nombre de la tabla en la base de datos.
+     *
+     * @tipo string
+     */
     private $tabla = '';
     
     /*
-    * Constructor de consultas del ORM PIPE.
-    * @tipo \PIPE\Clases\ConstructorConsulta|null
-    */
+     * Constructor de consultas del ORM PIPE.
+     *
+     * @tipo \PIPE\Clases\ConstructorConsulta|null
+     */
     private $constructor = null;
     
     /*
-    * Llave primaria de la tabla.
-    * @tipo string
-    */
+     * Llave primaria de la tabla.
+     *
+     * @tipo string
+     */
     private $llavePrimaria = 'id';
     
     /*
-    * Indica los campos que se mostrarán en la renderización de la tabla.
-    * @tipo array
-    */
+     * Indica los campos que se mostrarán en la renderización de la tabla.
+     *
+     * @tipo array
+     */
     private $visibles = [];
     
     /*
-    * Indica los campos que no se mostrarán en la renderización de la tabla.
-    * @tipo array
-    */
+     * Indica los campos que no se mostrarán en la renderización de la tabla.
+     *
+     * @tipo array
+     */
     private $ocultos = [];
     
     /*
-    * Indica los campos que pueden ser insertados.
-    * @tipo array
-    */
+     * Indica los campos que pueden ser insertados.
+     *
+     * @tipo array
+     */
     private $insertables = [];
     
     /*
-    * Indica los campos que pueden ser actualizados.
-    * @tipo array
-    */
+     * Indica los campos que pueden ser actualizados.
+     *
+     * @tipo array
+     */
     private $actualizables = [];
     
     /*
-    * Indica los alias para cada campo que se mostrarán en la renderización de la tabla.
-    * @tipo array
-    */
+     * Indica los alias para cada campo que se mostrarán en la renderización de la tabla.
+     *
+     * @tipo array
+     */
     private $alias = [];
     
     /*
-    * Nombre del campo donde se registra el tiempo de la creación del registro.
-    * @tipo string
-    */
+     * Nombre del campo donde se registra el tiempo de la creación del registro.
+     *
+     * @tipo string
+     */
     private $creadoEn = 'creado_en';
     
     /*
-    * Nombre del campo donde se registra el tiempo de la actualización del registro.
-    * @tipo string
-    */
+     * Nombre del campo donde se registra el tiempo de la actualización del registro.
+     *
+     * @tipo string
+     */
     private $actualizadoEn = 'actualizado_en';
     
     /*
-    * Crea una nueva instancia de la clase HTML.
-    *
-    * @parametro string $tabla
-    * @retorno void
-    */
+     * Ordenamiento del resultado de la consulta SQL.
+     *
+     * @tipo array
+     */
+    private $ordenarPor = [];
+    
+    /*
+     * Crea una nueva instancia de la clase HTML.
+     *
+     * @parametro string $tabla
+     * @retorno void
+     */
     public function __construct($tabla){
         if(!$this->verificarTablaExiste($tabla))
             exit(Texto::$textos['TABLA_NO_EXISTE'].' <b>'.$tabla.'</b>.');
@@ -135,11 +154,11 @@ class HTML{
     }
     
     /*
-    * Establece la llave primaria referente a la tabla especificada.
-    *
-    * @parametro string $llavePrimaria
-    * @retorno $this
-    */
+     * Establece la llave primaria referente a la tabla especificada.
+     *
+     * @parametro string $llavePrimaria
+     * @retorno $this
+     */
     public function llavePrimaria($llavePrimaria){
         $verificacion = $this->verificarCamposExisten([$llavePrimaria]);
         $metodo = $this->obtenerMetodoLlamado(debug_backtrace());
@@ -150,10 +169,10 @@ class HTML{
     }
     
     /*
-    * Establece los campos que se mostrarán en la renderización de la tabla.
-    *
-    * @retorno $this
-    */
+     * Establece los campos que se mostrarán en la renderización de la tabla.
+     *
+     * @retorno $this
+     */
     public function visibles(){
         $parametros = func_get_args();
         $verificacion = $this->verificarCamposExisten($parametros);
@@ -165,10 +184,10 @@ class HTML{
     }
     
     /*
-    * Establece los campos que no se mostrarán en la renderización de la tabla.
-    *
-    * @retorno $this
-    */
+     * Establece los campos que no se mostrarán en la renderización de la tabla.
+     *
+     * @retorno $this
+     */
     public function ocultos(){
         $parametros = func_get_args();
         $verificacion = $this->verificarCamposExisten($parametros);
@@ -180,10 +199,10 @@ class HTML{
     }
     
     /*
-    * Establece los campos que podrán ser insertados.
-    *
-    * @retorno $this
-    */
+     * Establece los campos que podrán ser insertados.
+     *
+     * @retorno $this
+     */
     public function insertables(){
         $parametros = func_get_args();
         $verificacion = $this->verificarCamposExisten($parametros);
@@ -195,10 +214,10 @@ class HTML{
     }
     
     /*
-    * Establece los campos que podrán ser actualizados.
-    *
-    * @retorno $this
-    */
+     * Establece los campos que podrán ser actualizados.
+     *
+     * @retorno $this
+     */
     public function actualizables(){
         $parametros = func_get_args();
         $verificacion = $this->verificarCamposExisten($parametros);
@@ -210,12 +229,13 @@ class HTML{
     }
     
     /*
-    * Establece los alias para cada campo que se mostrarán en la renderización de la tabla.
-    *
-    * @retorno $this
-    */
+     * Establece los alias para cada campo que se mostrarán en la renderización de la tabla.
+     *
+     * @parametro array $alias
+     * @retorno $this
+     */
     public function alias($alias){
-        $verificacion = $this->verificarCamposExisten($alias,true);
+        $verificacion = $this->verificarCamposExisten($alias, true);
         $metodo = $this->obtenerMetodoLlamado(debug_backtrace());
         if(!$verificacion['existen'])
             exit($metodo.' - '.Texto::$textos['CAMPO_NO_EXISTE'].' <b>'.$verificacion['campo'].'</b>.');
@@ -224,10 +244,11 @@ class HTML{
     }
     
     /*
-    * Establece el nombre del campo donde se registra el tiempo de la creación del registro.
-    *
-    * @retorno $this
-    */
+     * Establece el nombre del campo donde se registra el tiempo de la creación del registro.
+     *
+     * @parametro string $creadoEn
+     * @retorno $this
+     */
     public function creadoEn($creadoEn){
         $verificacion = $this->verificarCamposExisten([$creadoEn]);
         $metodo = $this->obtenerMetodoLlamado(debug_backtrace());
@@ -238,10 +259,11 @@ class HTML{
     }
     
     /*
-    * Establece el nombre del campo donde se registra el tiempo de la actualización del registro.
-    *
-    * @retorno $this
-    */
+     * Establece el nombre del campo donde se registra el tiempo de la actualización del registro.
+     *
+     * @parametro string $actualizadoEn
+     * @retorno $this
+     */
     public function actualizadoEn($actualizadoEn){
         $verificacion = $this->verificarCamposExisten([$actualizadoEn]);
         $metodo = $this->obtenerMetodoLlamado(debug_backtrace());
@@ -252,10 +274,28 @@ class HTML{
     }
     
     /*
-    * Renderiza la tabla especificada con su respectiva configuración.
-    *
-    * @retorno void
-    */
+     * Ordena el resultado de la consulta SQL.
+     *
+     * @parametro string|array $campo
+     * @parametro string $tipo
+     * @retorno $this
+     */
+    public function ordenarPor($campo, $tipo = 'asc'){
+        $ordenes = is_array($campo) && !empty($campo) ? $campo : [$campo];
+        $verificacion = $this->verificarCamposExisten($ordenes);
+        $metodo = $this->obtenerMetodoLlamado(debug_backtrace());
+        if(!$verificacion['existen'])
+            exit($metodo.' - '.Texto::$textos['CAMPO_NO_EXISTE'].' <b>'.$verificacion['campo'].'</b>.');
+        $this->ordenarPor = ['ordenes' => $ordenes, 'tipo' => $tipo];
+        $this->constructor = $this->constructor->ordenarPor($ordenes, $tipo);
+        return $this;
+    }
+    
+    /*
+     * Renderiza la tabla especificada con su respectiva configuración.
+     *
+     * @retorno void
+     */
     public function renderizar(){
         $html = $this;
         require __DIR__.'/../Vistas/tabla.php';
@@ -263,11 +303,11 @@ class HTML{
     
     //Inicio métodos privados.
     /*
-    * Verifica que la tabla especificada exista en la base de datos.
-    *
-    * @parametro string $tabla
-    * @retorno boolean
-    */
+     * Verifica que la tabla especificada exista en la base de datos.
+     *
+     * @parametro string $tabla
+     * @retorno boolean
+     */
     private function verificarTablaExiste($tabla){
         $pdo = PIPE::obtenerPDO();
         $consulta = $pdo->query('select * from '.$tabla);
@@ -276,12 +316,12 @@ class HTML{
     }
     
     /*
-    * Verifica que los campos existan en la tabla especificada.
-    *
-    * @parametro array $campos
-    * @parametro boolean $asociativo
-    * @retorno array
-    */
+     * Verifica que los campos existan en la tabla especificada.
+     *
+     * @parametro array $campos
+     * @parametro boolean $asociativo
+     * @retorno array
+     */
     private function verificarCamposExisten($campos, $asociativo = false){
         $camposTabla = $this->obtenerCamposTabla();
         foreach($campos as $clave => $valor){
@@ -292,61 +332,50 @@ class HTML{
     }
     
     /*
-    * Asigna el constructor de consultas del ORM PIPE.
-    *
-    * @retorno void
-    */
+     * Asigna el constructor de consultas del ORM PIPE.
+     *
+     * @retorno void
+     */
     private function asignarConstructor(){
         $constructor = PIPE::tabla($this->tabla);
         $this->constructor = $constructor;
     }
     
     /*
-    * Obtiene el encabezado de la tabla según los campos.
-    *
-    * @retorno json
-    */
+     * Obtiene el encabezado de la tabla según los campos.
+     *
+     * @retorno json
+     */
     private function obtenerEncabezado(){
         $encabezado = $this->obtenerCamposTabla();
         return json_encode($encabezado);	
     }
     
     /*
-    * Obtiene los registros de la tabla especificada.
-    *
-    * @retorno json
-    */
+     * Obtiene los registros de la tabla especificada.
+     *
+     * @retorno json
+     */
     private function obtenerRegistros(){
         $registros = $this->constructor->todo(PIPE::JSON);
         return $registros;
     }
     
     /*
-    * Obtiene el paginado automático según los registros de la tabla.
-    *
-    * @retorno json
-    */
+     * Obtiene el paginado automático según los registros de la tabla.
+     *
+     * @retorno json
+     */
     private function obtenerPaginado(){
-        $cantRegistros = count($this->constructor->todo());
-        $registrosPorPagina = ['total' => $cantRegistros];
-        if($cantRegistros >= 100)
-            $registrosPorPagina['paginado'] = [5, 10, 25, 50, 100];
-        else if($cantRegistros >= 50 && $cantRegistros < 100)
-            $registrosPorPagina['paginado'] = [5, 10, 25, 50];
-        else if($cantRegistros >= 25 && $cantRegistros < 50)
-            $registrosPorPagina['paginado'] = [5, 10, 25];
-        else if($cantRegistros >= 10 && $cantRegistros < 25)
-            $registrosPorPagina['paginado'] = [5, 10];
-        else
-            $registrosPorPagina['paginado'] = null;
-        return json_encode($registrosPorPagina);
+        $paginado = obtenerPaginado($this->constructor->todo());
+        return json_encode($paginado);
     }
     
     /*
-    * Obtiene todos los campos de la tabla en la base de datos.
-    *
-    * @retorno array
-    */
+     * Obtiene todos los campos de la tabla en la base de datos.
+     *
+     * @retorno array
+     */
     private function obtenerCamposTabla(){
         $pdo = PIPE::obtenerPDO();
         switch(Configuracion::obtenerVariable('BD_CONTROLADOR')){
@@ -389,10 +418,10 @@ class HTML{
     }
     
     /*
-    * Obtiene los atributos de la clase HTML.
-    *
-    * @retorno json
-    */
+     * Obtiene los atributos de la clase HTML.
+     *
+     * @retorno json
+     */
     private function obtenerAtributos(){
         $atributos = [
             'elementoId' => $this->elementoId,
@@ -405,16 +434,17 @@ class HTML{
             'actualizables' => $this->actualizables,
             'alias' => $this->alias,
             'creadoEn' => $this->creadoEn,
-            'actualizadoEn' => $this->actualizadoEn
+            'actualizadoEn' => $this->actualizadoEn,
+            'ordenarPor' => $this->ordenarPor
         ];
         return json_encode($atributos);
     }
     
     /*
-    * Obtiene las variables de configuración.
-    *
-    * @retorno json
-    */
+     * Obtiene las variables de configuración.
+     *
+     * @retorno json
+     */
     private function obtenerConfiguracion(){
         $entorno = require __DIR__.'/../Entorno/entorno.php';
         $config = [
@@ -434,10 +464,11 @@ class HTML{
     }
     
     /*
-    * Obtiene el nombre del método invocado.
-    *
-    * @retorno string
-    */
+     * Obtiene el nombre del método invocado.
+     *
+     * @parametro array $depuracion
+     * @retorno string
+     */
     private function obtenerMetodoLlamado($depuracion){
         $metodo = $depuracion[0]['function'];
         return $metodo;
