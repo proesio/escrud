@@ -2,8 +2,8 @@
 /*
  * Autor: Juan Felipe Valencia Murillo
  * Fecha inicio de creación: 31-05-2020
- * Fecha última modificación: 10-09-2020
- * Versión: 1.2.0
+ * Fecha última modificación: 15-09-2020
+ * Versión: 1.2.1
  * Sitio web: https://escrud.proes.tk
  *
  * Copyright (C) 2020 Juan Felipe Valencia Murillo <juanfe0245@gmail.com>
@@ -87,7 +87,7 @@ $textos = json_encode($peticion->textos);
                     ){
             ?>
                         <label>
-                            <?=obtenerCasillaEncabezado($columna, $peticion->atributos); ?>
+                            <?=obtenerCasillaEncabezado($columna, $peticion->atributos) ?? $columna; ?>
                             <input
                                 type="text"
                                 id="<?='campo-'.$columna.$elementoId; ?>"
