@@ -1,6 +1,6 @@
 <p align="center">
-    <a href="https://escrud.proes.tk" target="_blank">
-        <img src="https://escrud.proes.tk/imagenes/escrud-eslogan-transparente.png" width="300" alt="Eslogan Escrud">
+    <a href="https://escrud.proes.io" target="_blank">
+        <img src="https://escrud.proes.io/imagenes/escrud-eslogan-transparente.png" width="300" alt="Eslogan Escrud">
     </a>
 </p>
 
@@ -13,14 +13,14 @@
 
 ## Escrud
 
-Escrud - CRUD en Español es una herramienta que genera automáticamente una interfaz para crear, consultar, editar y eliminar registros de una tabla en la base de datos por medio de métodos escritos en español. https://escrud.proes.tk
+Escrud - CRUD en Español es una herramienta que genera automáticamente una interfaz para crear, consultar, editar y eliminar registros de una tabla en la base de datos por medio de métodos escritos en español. https://escrud.proes.io
 
-## [Documentación](https://escrud.proes.tk/documentacion/1.x/).
+## [Documentación](https://escrud.proes.io/documentacion/2.x/).
 
-- [Instalación](https://escrud.proes.tk/documentacion/1.x/instalacion/).
-- [Configuración](https://escrud.proes.tk/documentacion/1.x/configuracion/).
-- [Convenciones](https://escrud.proes.tk/documentacion/1.x/convenciones/).
-- [Implementación](https://escrud.proes.tk/documentacion/1.x/implementacion/).
+- [Instalación](https://escrud.proes.io/documentacion/2.x/instalacion/).
+- [Configuración](https://escrud.proes.io/documentacion/2.x/configuracion/).
+- [Convenciones](https://escrud.proes.io/documentacion/2.x/convenciones/).
+- [Implementación](https://escrud.proes.io/documentacion/2.x/implementacion/).
 
 ## Licencia
 

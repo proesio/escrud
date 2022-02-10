@@ -1,0 +1,63 @@
+/**
+ * Este archivo es parte del proyecto Escrud.
+ * 
+ * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
+ * @copyright 2020 - presente  Juan Felipe Valencia Murillo
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @version   GIT:  2.0.0
+ * @link      https://escrud.proes.io
+ * @since     Fecha inicio de creación del proyecto  2020-05-31
+ */
+
+.puntos:after {
+  content: '•••';
+  position: relative;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(195, 195, 195, 1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(195, 195, 195, 1);
+  box-shadow: 0px 0px 5px 0px rgba(195, 195, 195, 1);
+  margin-top: 0px;
+  padding: 0px 0px;
+  position: absolute;
+  z-index: 1;
+}
+
+.menu > li {
+  font: inherit;
+  border: 0;
+  padding: 10px 30px 10px 15px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-decoration: unset;
+  color: #000;
+  font-weight: 500;
+  transition: 0.5s linear;
+  -webkit-transition: 0.5s linear;
+  -moz-transition: 0.5s linear;
+  -ms-transition: 0.5s linear;
+  -o-transition: 0.5s linear;
+  cursor: pointer;
+}
+
+.menu > li:hover {
+  background-color:#f1f3f7;
+}
+
+.menu > .editar {
+  color:#007BFF;
+  border-radius: 5px;
+}
+
+.menu > .eliminar {
+  color:#DC3545;
+  border-radius: 5px;
+}

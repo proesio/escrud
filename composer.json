@@ -8,21 +8,24 @@
         "database"
     ],
     "license": "MIT",
-    "homepage": "https://escrud.proes.tk",
+    "homepage": "https://escrud.proes.io",
     "authors": [
         {
             "name": "Juan Felipe Valencia Murillo",
             "email": "juanfe0245@gmail.com",
-            "homepage": "https://jfvalenciam.proes.tk",
-            "role": "Desarrollador"
+            "homepage": "https://jfvalenciam.proes.io",
+            "role": "Developer"
         }
     ],
     "require": {
-        "php": ">=7.2.0",
-        "proesio/pipe": "^4"
+        "php": ">=7.3",
+        "proesio/pipe": "^5"
     },
     "autoload": {
-        "files": ["proesio/escrud/escrud.php"]
+        "files": [
+            "public/Escrud/src/inicializador.php"
+        ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

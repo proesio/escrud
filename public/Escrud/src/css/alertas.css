@@ -1,0 +1,59 @@
+/**
+ * Este archivo es parte del proyecto Escrud.
+ * 
+ * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
+ * @copyright 2020 - presente  Juan Felipe Valencia Murillo
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @version   GIT:  2.0.0
+ * @link      https://escrud.proes.io
+ * @since     Fecha inicio de creación del proyecto  2020-05-31
+ */
+
+.alerta {
+  min-width: 300px;
+  min-height: 40px;
+  position: fixed;
+  margin-left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 3px;
+  display: flex;
+}
+
+.alerta .contenido {
+  margin: 11px;
+  margin-right: 30px;
+}
+
+.alerta .cerrar-alerta {
+  top: 6px;
+  right: 10px;
+  position: absolute;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.alerta-exito {
+  border: 1px solid #287F45;
+  background-color: #28A745;
+  color: white;
+}
+
+.alerta-info {
+  border: 1px solid #005DC1;
+  background-color: #007BFF;
+  color: white;
+}
+
+.alerta-adv {
+  border: 1px solid #FFAD07;
+  background-color: #FFC107;
+  color: white;
+}
+
+.alerta-error {
+  border: 1px solid #BE3545;
+  background-color: #DC3545;
+  color: white;
+}

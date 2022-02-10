@@ -1,0 +1,121 @@
+/**
+ * Este archivo es parte del proyecto Escrud.
+ * 
+ * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
+ * @copyright 2020 - presente  Juan Felipe Valencia Murillo
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @version   GIT:  2.0.0
+ * @link      https://escrud.proes.io
+ * @since     Fecha inicio de creación del proyecto  2020-05-31
+ */
+
+.contenedor-barra {
+  height: 5px;
+}
+
+.barra {
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  background-color: #87B4FE;
+  margin: auto;
+}
+
+.barra .animacion {
+  width: 150%;
+  margin-left: 130px;
+  animation-name: animacion;
+  -o-animation-name: animacion;
+  -ms-animation-name: animacion;
+  -webkit-animation-name: animacion;
+  -moz-animation-name: animacion;
+  animation-duration: 1s;
+  -o-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+  -o-animation-direction: alternate-reverse;
+  -ms-animation-direction: alternate-reverse;
+  -webkit-animation-direction: alternate-reverse;
+  -moz-animation-direction: alternate-reverse;
+}
+
+.barra .lineas {
+  background-color: #5F9BFE;
+  float: left;
+  width: 15px;
+  height: 96px;
+  margin-right: 20px;
+  margin-top: -22px;
+  transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+}
+
+@keyframes animacion {
+  0% {
+    margin-left: 0px;
+    margin-top: -14px;
+  }
+
+  100% {
+    margin-left: -100px;
+    margin-top: -14px;
+  }
+}
+
+@-o-keyframes animacion {
+  0% {
+    margin-left: 0px;
+    margin-top: -14px;
+  }
+
+  100% {
+    margin-left: -100px;
+    margin-top: -14px;
+  }
+}
+
+@-ms-keyframes animacion {
+  0% {
+    margin-left: 0px;
+    margin-top: -14px;
+  }
+
+  100% {
+    margin-left: -100px;
+    margin-top: -14px;
+  }
+}
+
+@-webkit-keyframes animacion {
+  0% {
+    margin-left: 0px;
+    margin-top: -14px;
+  }
+
+  100% {
+    margin-left: -100px;
+    margin-top: -14px;
+  }
+}
+
+@-moz-keyframes animacion {
+  0% {
+    margin-left: 0px;
+    margin-top: -14px;
+  }
+
+  100% {
+    margin-left: -100px;
+    margin-top: -14px;
+  }
+}

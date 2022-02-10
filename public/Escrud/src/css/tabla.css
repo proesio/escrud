@@ -1,0 +1,224 @@
+/**
+ * Este archivo es parte del proyecto Escrud.
+ * 
+ * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
+ * @copyright 2020 - presente  Juan Felipe Valencia Murillo
+ * @license   https://opensource.org/licenses/MIT  MIT License
+ * @version   GIT:  2.0.0
+ * @link      https://escrud.proes.io
+ * @since     Fecha inicio de creación del proyecto  2020-05-31
+ */
+
+body {
+  font-family: arial;
+}
+
+.contenedor {
+  border: 1px solid #C3C3C3;
+  border-radius: 5px;
+  min-width: 500px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(195, 195, 195, 1);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(195, 195, 195, 1);
+  box-shadow: 0px 0px 5px 0px rgba(195, 195, 195, 1);
+}
+
+.contenedor-tabla {
+  overflow: auto;
+}
+
+.tabla {
+  background-color: white;
+  text-align: left;
+  border-collapse: collapse;
+  width: 100%;
+  border-top: 1px solid #C3C3C3;
+  border-bottom: 1px solid #C3C3C3;
+}
+
+.tabla th, td {
+  padding: 10px;
+}
+
+.tabla thead {
+  background-color: white;
+  border-bottom: 3px solid  #C3C3C3;
+  color: #1E1E1E;
+}
+
+.tabla .tr:hover td {
+  background-color: #DDDDDD;
+  transition: 0.5s;
+}
+
+.tabla tbody tr, .tabla thead th {
+  color: rgba(0, 0, 0, 0.87);
+  border-bottom: 1px solid  #C3C3C3;
+}
+
+.tabla tbody tr:nth-child(even){
+	background-color: #F0F2F1;
+}
+
+.contenedor-paginador {
+  padding: 10px;
+  text-align: right;
+}
+
+.fuente-paginador {
+  font-size: 90%;
+}
+
+.fuente-modal-eliminar {
+  font-size: 200%;
+}
+
+.contenedor-buscador {
+  border-top: 1px solid #C3C3C3;
+}
+
+.buscador {
+  border: 1px solid #C3C3C3;
+  width: 150px;
+  height: 30px;
+}
+
+.buscador:focus {
+  outline: none;
+  border: 1px solid #28A745;
+}
+
+.buscador::placeholder, 
+.buscador::-webkit-input-placeholder {
+  padding-left: 5px;
+}
+
+.btn, .select {
+  background-color: white;
+  border: 1px solid #C3C3C3;
+  width: auto;
+  color: rgba(0, 0, 0, 0.87);
+  transition: 0.5s;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: #DDDDDD;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.select:hover {
+  cursor: pointer;
+}
+
+.select:focus {
+  outline: none;
+}
+
+.btn-crear {
+  border: 1px solid #28A745;
+  color: #28A745;
+  height: 30px;
+}
+
+.btn-crear:hover{
+  background-color: #28A745;
+  color: white;
+}
+
+.btn-editar {
+  border: 1px solid #007BFF;
+  color: #007BFF;
+}
+
+.btn-editar:hover {
+  background-color: #007BFF;
+  color: white;
+}
+
+.btn-eliminar {
+  border: 1px solid #DC3545;
+  color: #DC3545;
+}
+
+.btn-eliminar:hover {
+  background-color: #DC3545;
+  color: white;
+}
+
+.btn-guardar {
+  border: 1px solid #28A745;
+  border-radius: 3px;
+  background-color: #28A745;
+  color: white;
+  height: 25px;
+  float: right;
+}
+
+.btn-guardar:hover {
+  border: 1px solid #287F45;
+  background-color: #287F45;
+}
+
+.btn-guardar-cambios {
+  border: 1px solid #007BFF;
+  border-radius: 3px;
+  background-color: #007BFF;
+  color: white;
+  height: 25px;
+  float: right;
+}
+
+.btn-guardar-cambios:hover {
+  border: 1px solid #005DC1;
+  background-color: #005DC1;
+}
+
+.btn-confirmar {
+  border: 1px solid #DC3545;
+  border-radius: 3px;
+  background-color: #DC3545;
+  color: white;
+  height: 25px;
+  float: right;
+}
+
+.btn-confirmar:hover {
+  border: 1px solid #BE3545;
+  background-color: #BE3545;
+}
+
+.btn-cancelar {
+  border: 0px;
+  border-radius: 3px;
+  margin-right: 5px;
+  height: 25px;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.display-none {
+  display: none;
+}
+
+.m-r-20 {
+  margin-right: 20px;
+}
+
+.contenedor-titulo {
+  height: 25px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #343434;
+  border-bottom: 1px solid #C3C3C3;
+}
+
+.contenedor-acciones {
+  height: 30px;
+  margin: 10px;
+}
