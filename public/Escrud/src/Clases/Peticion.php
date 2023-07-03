@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -22,6 +22,7 @@ use Escrud\Clases\Modelos\Tabla;
 use PIPE\Clases\Excepciones\ORM;
 use PIPE\Clases\Excepciones\SQL;
 use function Escrud\Funciones\obtenerPaginado;
+use function Escrud\Funciones\deserializarClosure;
 
 class Peticion
 {
@@ -72,7 +73,22 @@ class Peticion
             $this->_peticion->cantidad, $this->_peticion->inicio
         );
 
-        return $this->_respuesta(true, $tabla->obtener());
+        $registros = $tabla->obtener();
+        $accesores = $this->_peticion->atributos['accesores'];
+
+        if ($accesores) {
+            foreach ($registros as $claveRegistro => $valorRegistro) {
+                foreach ($accesores as $claveAccesor => $valorAccesor) {
+                    $closure = deserializarClosure($valorAccesor);
+
+                    $registros[$claveRegistro]->{$claveAccesor} = (
+                        $closure($valorRegistro->{$claveAccesor})
+                    );
+                }
+            }
+        }
+
+        return $this->_respuesta(true, $registros);
     }
 
     /**
@@ -99,9 +115,17 @@ class Peticion
     {
         try {
             $registro = json_decode($this->_peticion->registro, true);
+            $mutadores = $this->_peticion->atributos['mutadores'];
 
-            $insercion = $tabla = new Tabla();
-            $tabla->insertar($registro);
+            if ($mutadores) {
+                foreach ($mutadores as $clave => $valor) {
+                    $closure = deserializarClosure($valor);
+                    $registro[$clave] = $closure($registro[$clave]);
+                }
+            }
+
+            $tabla = new Tabla();
+            $insercion = $tabla->insertar($registro);
 
             return $this->_respuesta($insercion ? true : false);
         } catch (ORM $excepcion) {
@@ -123,11 +147,21 @@ class Peticion
     public function editar()
     {
         try {
+            $registro = (array) $this->_peticion->registro;
+            $mutadores = $this->_peticion->atributos['mutadores'];
+
+            if ($mutadores) {
+                foreach ($mutadores as $clave => $valor) {
+                    $closure = deserializarClosure($valor);
+                    $registro[$clave] = $closure($registro[$clave]);
+                }
+            }
+
             Tabla::donde(
                 $this->_peticion->atributos['llavePrimaria'].' = ?',
                 [$this->_peticion->valorLlavePrimaria]
             )
-            ->actualizar((array) $this->_peticion->registro);
+            ->actualizar($registro);
 
             return $this->_respuesta(true);
         } catch (ORM $excepcion) {

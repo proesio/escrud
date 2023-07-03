@@ -4,12 +4,12 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
 
-.modal {
+.escrud-modal {
   position: fixed;
   z-index: 1;
   padding-top: 50px;
@@ -17,23 +17,23 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal .encabezado {
+.escrud-modal .escrud-encabezado {
   background-color: #fefefe;
   margin: auto;
   border-top: 1px solid #888;
   border-left: 1px solid #888;
   border-right: 1px solid #888;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-bottom: 1px solid #C3C3C3;
   width: 80%;
   height: 50px;
+  overflow: hidden;
 }
 
-.modal .titulo {
+.escrud-modal .escrud-titulo {
   color: #1E1E1E;
   float: left;
   font-size: 130%;
@@ -42,7 +42,7 @@
   margin-left: 20px;
 }
 
-.modal .cerrar-modal {
+.escrud-modal .escrud-cerrar-modal {
   color: #aaaaaa;
   float: right;
   font-size: 30px;
@@ -51,13 +51,14 @@
   margin-right: 20px;
 }
 
-.modal .cerrar-modal:hover, .cerrar-modal:focus {
+.escrud-modal .escrud-cerrar-modal:hover,
+.escrud-cerrar-modal:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
 
-.modal .contenido-modal {
+.escrud-modal .escrud-contenido-modal {
   background-color: #fefefe;
   margin: auto;
   border-left: 1px solid #888;
@@ -67,32 +68,35 @@
   overflow: auto;
 }
 
-.modal .contenido {
+.escrud-modal .escrud-contenido {
   padding: 20px;
-  padding-top: 0px;
 }
 
-.modal .pie-pagina {
+.escrud-modal .escrud-pie-pagina {
   background-color: #fefefe;
   margin: auto;
   border-left: 1px solid #888;
   border-right: 1px solid #888;
   border-bottom: 1px solid #888;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
   width: 80%;
-  height: 50px;
+  height: 55px;
+  overflow: hidden;
 }
 
-.modal .contenido-pie-pagina {
-  padding: 15px;
+.escrud-modal .escrud-contenido-pie-pagina {
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
-.modal .contenedor-btns-eliminar {
+.escrud-modal .escrud-contenedor-btns-eliminar {
   float: right;
 }
 
-.campo-texto {
+.escrud-etiqueta {
+  width: 100%;
+}
+
+.escrud-campo-texto {
   width: 100%;
   height: 20px;
   border-bottom: 1px solid #C3C3C3;
@@ -102,7 +106,7 @@
   margin-bottom: 10px;
 }
 
-.campo-texto:focus {
+.escrud-campo-texto:focus {
   outline: none;
   border-bottom: 1px solid #007BFF;
 }

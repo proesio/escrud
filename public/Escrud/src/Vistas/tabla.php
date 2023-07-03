@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -30,21 +30,20 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
     <link rel="stylesheet" href="<?=urlBase('css/modal.css'); ?>"/>
     <link rel="stylesheet" href="<?=urlBase('css/alertas.css'); ?>"/>
     <link rel="stylesheet" href="<?=urlBase('css/barra-cargando.css'); ?>"/>
-    <link rel="stylesheet" href="<?=urlBase('css/menu.css'); ?>"/>
 </head>
 
-<body>
+<body class="escrud-cuerpo">
 
-<div class="contenedor">
+<div class="escrud-contenedor">
 
-<div class="contenedor-barra">
+<div class="escrud-contenedor-barra">
 
 <?php $barraCargandoId = 'superior'.$html->_elementoId; ?>
 <?php include 'barra_cargando.php'; ?>
 
 </div>
 
-<div class="contenedor-titulo">
+<div class="escrud-contenedor-titulo">
     <strong>
         <?=$atributos['titulo'] 
             ? substr($atributos['titulo'], 0, 60) 
@@ -52,7 +51,7 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
     </strong>
 </div>
 
-<div class="contenedor-acciones">
+<div class="escrud-contenedor-acciones">
 
 <?php if ($atributos['acciones']['acciones'] && $atributos['acciones']['crear']) : ?>
 
@@ -63,7 +62,7 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
         config: <?=$html->_obtenerConfiguracion(); ?>,
         textos: <?=Texto::obtenerTextos(); ?>
     })'
-    class="btn btn-crear">
+    class="escrud-btn escrud-btn-crear">
     <?=Texto::$textos['CREAR_REGISTRO']; ?>
 </button>
 
@@ -71,7 +70,7 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
 
 <button 
     id="<?='btn-eliminar-seleccion'.$html->_elementoId; ?>" 
-    class="btn btn-eliminar btn-crear display-none"
+    class="escrud-btn escrud-btn-eliminar escrud-display-none"
     onclick='abrirModalEliminar({
         modalId: "<?='modal-eliminar'.$html->_elementoId; ?>",
         encabezado: <?=$html->_obtenerEncabezado(); ?>,
@@ -87,7 +86,7 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
 
 <div id="<?='tabla'.$html->_elementoId; ?>"></div>
 
-<div class="contenedor-barra">
+<div class="escrud-contenedor-barra">
 
 <?php $barraCargandoId = 'inferior'.$html->_elementoId; ?>
 <?php require 'barra_cargando.php'; ?>
@@ -108,7 +107,6 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
 <script type="text/javascript" src="<?=urlBase('js/consultar.js'); ?>"></script>
 <script type="text/javascript" src="<?=urlBase('js/editar.js'); ?>"></script>
 <script type="text/javascript" src="<?=urlBase('js/eliminar.js'); ?>"></script>
-<script type="text/javascript" src="<?=urlBase('js/menu.js'); ?>"></script>
 
 <script type="text/javascript">
 

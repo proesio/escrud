@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -24,26 +24,26 @@ $textos = json_encode($peticion->textos);
 
 ?>
 
-<div id="<?='modal-eliminar'.$elementoId; ?>" class="modal">
-    <div class="encabezado">
-        <span class="titulo"></span>
-        <span onclick="cerrarModal('<?='modal-eliminar'.$elementoId; ?>')" class="cerrar-modal">&times;</span>
+<div id="<?='modal-eliminar'.$elementoId; ?>" class="escrud-modal">
+    <div class="escrud-encabezado">
+        <span class="escrud-titulo"></span>
+        <span onclick="cerrarModal('<?='modal-eliminar'.$elementoId; ?>')" class="escrud-cerrar-modal">&times;</span>
     </div>
 
-    <div class="contenido-modal">
-        <div class="contenido">
-            <p align="center" class="fuente-modal-eliminar">
-                <?=$peticion->textos['CONFIRMACION_ELIMINACION_REGISTRO']; ?>
+    <div class="escrud-contenido-modal">
+        <div class="escrud-contenido">
+            <p align="center" class="escrud-fuente-modal-eliminar">
+                <?=sprintf($peticion->textos['CONFIRMACION_ELIMINACION_REGISTRO'], count($peticion->valorLlavesPrimarias)); ?>
             </p>
         </div>
     </div>
 
-    <div class="pie-pagina">
-        <div class="contenido-pie-pagina">
-            <div class="contenedor-btns-eliminar">
+    <div class="escrud-pie-pagina">
+        <div class="escrud-contenido-pie-pagina">
+            <div class="escrud-contenedor-btns-eliminar">
                 <button
                     onclick="cerrarModal('<?='modal-eliminar'.$elementoId; ?>')"
-                    class="btn btn-cancelar">
+                    class="escrud-btn escrud-btn-cancelar">
                     <?=$peticion->textos['CANCELAR']; ?>
                 </button>
                 <button
@@ -58,7 +58,7 @@ $textos = json_encode($peticion->textos);
                         config: <?=$config; ?>,
                         textos: <?=$textos; ?>
                     })'
-                    class="btn btn-confirmar">
+                    class="escrud-btn escrud-btn-eliminar">
                     <?=$peticion->textos['CONFIRMAR']; ?>
                 </button>
             </div>

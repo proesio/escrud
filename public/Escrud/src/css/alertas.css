@@ -4,12 +4,12 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
 
-.alerta {
+.escrud-alerta {
   min-width: 300px;
   min-height: 40px;
   position: fixed;
@@ -18,41 +18,40 @@
   bottom: 10px;
   border-radius: 3px;
   display: flex;
+  z-index: 1;
 }
 
-.alerta .contenido {
-  margin: 11px;
-  margin-right: 30px;
+.escrud-alerta .escrud-contenido {
+  padding: 10px 15px 10px 10px;
 }
 
-.alerta .cerrar-alerta {
-  top: 6px;
-  right: 10px;
-  position: absolute;
-  color: white;
+.escrud-alerta .escrud-cerrar-alerta {
+  float: right;
+  margin: auto 10px auto auto;
   font-size: 25px;
+  color: white;
   cursor: pointer;
 }
 
-.alerta-exito {
+.escrud-alerta-exito {
   border: 1px solid #287F45;
   background-color: #28A745;
   color: white;
 }
 
-.alerta-info {
+.escrud-alerta-info {
   border: 1px solid #005DC1;
   background-color: #007BFF;
   color: white;
 }
 
-.alerta-adv {
+.escrud-alerta-adv {
   border: 1px solid #FFAD07;
   background-color: #FFC107;
   color: white;
 }
 
-.alerta-error {
+.escrud-alerta-error {
   border: 1px solid #BE3545;
   background-color: #DC3545;
   color: white;

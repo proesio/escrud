@@ -4,29 +4,25 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
 
-body {
+.escrud-cuerpo {
   font-family: arial;
 }
 
-.contenedor {
-  border: 1px solid #C3C3C3;
-  border-radius: 5px;
-  min-width: 500px;
-  -webkit-box-shadow: 0px 0px 5px 0px rgba(195, 195, 195, 1);
-  -moz-box-shadow: 0px 0px 5px 0px rgba(195, 195, 195, 1);
-  box-shadow: 0px 0px 5px 0px rgba(195, 195, 195, 1);
+.escrud-contenedor {
+  border: 2px solid #C3C3C3;
+  min-width: 200px;
 }
 
-.contenedor-tabla {
+.escrud-contenedor-tabla {
   overflow: auto;
 }
 
-.tabla {
+.escrud-tabla {
   background-color: white;
   text-align: left;
   border-collapse: collapse;
@@ -35,190 +31,197 @@ body {
   border-bottom: 1px solid #C3C3C3;
 }
 
-.tabla th, td {
+.escrud-tabla th,
+td {
   padding: 10px;
+  border: 1px solid #C3C3C3;
+  border-collapse: collapse !important;
+  min-width: 170px;
 }
 
-.tabla thead {
+.escrud-tabla thead {
   background-color: white;
-  border-bottom: 3px solid  #C3C3C3;
+  border-bottom: 2px solid #C3C3C3;
   color: #1E1E1E;
 }
 
-.tabla .tr:hover td {
+.escrud-tabla .escrud-tr:hover td {
   background-color: #DDDDDD;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
   transition: 0.5s;
 }
 
-.tabla tbody tr, .tabla thead th {
+.escrud-tabla tbody tr,
+.escrud-tabla thead th {
   color: rgba(0, 0, 0, 0.87);
-  border-bottom: 1px solid  #C3C3C3;
+  border-bottom: 1px solid #C3C3C3;
 }
 
-.tabla tbody tr:nth-child(even){
-	background-color: #F0F2F1;
+.escrud-tabla tbody tr:nth-child(odd) {
+  background-color: #F0F2F1;
 }
 
-.contenedor-paginador {
+.escrud-contenedor-paginador {
   padding: 10px;
   text-align: right;
 }
 
-.fuente-paginador {
+.escrud-fuente-paginador {
   font-size: 90%;
+  color: #808080;
 }
 
-.fuente-modal-eliminar {
+.escrud-fuente-modal-eliminar {
   font-size: 200%;
 }
 
-.contenedor-buscador {
+.escrud-contenedor-buscador {
   border-top: 1px solid #C3C3C3;
 }
 
-.buscador {
+.escrud-buscador {
   border: 1px solid #C3C3C3;
-  width: 150px;
-  height: 30px;
+  width: 100%;
+  height: 35px;
+  box-sizing: border-box;
 }
 
-.buscador:focus {
+.escrud-buscador:focus {
   outline: none;
-  border: 1px solid #28A745;
+  border: 1px solid black;
 }
 
-.buscador::placeholder, 
-.buscador::-webkit-input-placeholder {
+.escrud-buscador::placeholder,
+.escrud-buscador::-webkit-input-placeholder {
   padding-left: 5px;
 }
 
-.btn, .select {
+.escrud-btn,
+.escrud-select {
   background-color: white;
   border: 1px solid #C3C3C3;
   width: auto;
+  height: 35px;
   color: rgba(0, 0, 0, 0.87);
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
   transition: 0.5s;
 }
 
-.btn:hover {
+.escrud-btn:hover {
   cursor: pointer;
   background-color: #DDDDDD;
 }
 
-.btn:focus {
+.escrud-btn:focus {
   outline: none;
 }
 
-.select:hover {
+.escrud-select:hover {
   cursor: pointer;
 }
 
-.select:focus {
+.escrud-select:focus {
   outline: none;
 }
 
-.btn-crear {
+.escrud-btn-crear {
   border: 1px solid #28A745;
   color: #28A745;
-  height: 30px;
 }
 
-.btn-crear:hover{
+.escrud-btn-crear:hover {
   background-color: #28A745;
   color: white;
 }
 
-.btn-editar {
+.escrud-btn-editar {
   border: 1px solid #007BFF;
   color: #007BFF;
 }
 
-.btn-editar:hover {
+.escrud-btn-editar:hover {
   background-color: #007BFF;
   color: white;
 }
 
-.btn-eliminar {
+.escrud-btn-eliminar {
   border: 1px solid #DC3545;
   color: #DC3545;
 }
 
-.btn-eliminar:hover {
+.escrud-btn-eliminar:hover {
   background-color: #DC3545;
   color: white;
 }
 
-.btn-guardar {
-  border: 1px solid #28A745;
-  border-radius: 3px;
-  background-color: #28A745;
+.escrud-btn-primario {
+  color: #808080;
+}
+
+.escrud-btn-primario:hover {
+  background-color: #808080;
+  border: 1px solid #808080;
   color: white;
-  height: 25px;
-  float: right;
 }
 
-.btn-guardar:hover {
-  border: 1px solid #287F45;
-  background-color: #287F45;
+.escrud-select-primario {
+  color: #808080;
 }
 
-.btn-guardar-cambios {
-  border: 1px solid #007BFF;
-  border-radius: 3px;
-  background-color: #007BFF;
-  color: white;
-  height: 25px;
-  float: right;
-}
-
-.btn-guardar-cambios:hover {
-  border: 1px solid #005DC1;
-  background-color: #005DC1;
-}
-
-.btn-confirmar {
-  border: 1px solid #DC3545;
-  border-radius: 3px;
-  background-color: #DC3545;
-  color: white;
-  height: 25px;
-  float: right;
-}
-
-.btn-confirmar:hover {
-  border: 1px solid #BE3545;
-  background-color: #BE3545;
-}
-
-.btn-cancelar {
+.escrud-btn-cancelar {
   border: 0px;
-  border-radius: 3px;
   margin-right: 5px;
-  height: 25px;
 }
 
-.display-flex {
+.escrud-display-flex {
   display: flex;
 }
 
-.display-none {
+.escrud-display-none {
   display: none;
 }
 
-.m-r-20 {
-  margin-right: 20px;
+.escrud-m-r-15 {
+  margin-right: 15px;
 }
 
-.contenedor-titulo {
-  height: 25px;
-  padding-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+.escrud-m-r-5 {
+  margin-right: 5px;
+}
+
+.escrud-contenedor-titulo {
+  padding: 5px 10px 10px 10px;
   color: #343434;
   border-bottom: 1px solid #C3C3C3;
 }
 
-.contenedor-acciones {
-  height: 30px;
+.escrud-contenedor-acciones {
+  height: 35px;
   margin: 10px;
+}
+
+.escrud-skicty {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -o-sticky;
+  position: sticky;
+  left: 0;
+}
+
+.escrud-skicty span {
+  background-color: white; 
+  padding: inherit;
+}
+
+.escrud-float-right {
+  float: right;
+}
+
+.escrud-td-texto {
+  text-align: center;
+  color: #212528;
 }

@@ -8,23 +8,23 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
 
 ?>
 
-<div class="contenedor-paginador">
+<div class="escrud-contenedor-paginador">
 
 <?php if ($peticion->paginado->paginado) : ?>
 
-    <span class="fuente-paginador">
+    <span class="escrud-fuente-paginador">
         <?=$peticion->textos['REGISTROS_POR_PAGINA']; ?>
     </span>
 
     <select
-        class="select"
+        class="escrud-select escrud-select-primario"
         onchange='inicializarTabla({
             inicio: 0,
             cantidad: this.value,
@@ -60,7 +60,7 @@ $cantidadPaginas = ($peticion->paginado->total ? $peticion->inicio + 1 : 0)
 
 ?>
 
-<span class="fuente-paginador"><?=$cantidadPaginas; ?></span>
+<span class="escrud-fuente-paginador"><?=$cantidadPaginas; ?></span>
 
 <button
     onclick='inicializarTabla({
@@ -72,7 +72,7 @@ $cantidadPaginas = ($peticion->paginado->total ? $peticion->inicio + 1 : 0)
         config: <?=$config; ?>,
         textos: <?=$textos; ?>
     })'
-    class="btn"
+    class="escrud-btn escrud-btn-primario"
     <?=$peticion->inicio < 5 ? 'disabled' : ''; ?>
     <?=$peticion->inicio < 5 ? 'style="cursor: default;"' : ''; ?>>
     <?=$peticion->textos['ANTERIOR']; ?>
@@ -88,7 +88,7 @@ $cantidadPaginas = ($peticion->paginado->total ? $peticion->inicio + 1 : 0)
         config: <?=$config; ?>,
         textos: <?=$textos; ?>
     })'
-    class="btn"
+    class="escrud-btn escrud-btn-primario"
     <?=$ultimaPagina ? 'disabled' : ''; ?>
     <?=$ultimaPagina ? 'style="cursor: default;"' : ''; ?>>
     <?=$peticion->textos['SIGUIENTE']; ?>

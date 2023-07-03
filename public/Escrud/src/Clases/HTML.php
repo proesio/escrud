@@ -8,16 +8,18 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
 
 namespace Escrud\Clases;
 
+use Closure;
 use PIPE\Clases\PIPE;
 use Escrud\Clases\Excepciones\Escrud;
 use function Escrud\Funciones\obtenerEntorno;
+use function Escrud\Funciones\serializarClosure;
 
 class HTML
 {
@@ -131,6 +133,22 @@ class HTML
      * @var string
      */
     private $_titulo = '';
+
+    /**
+     * Indica las modificaciones de datos por medio de funciones 
+     * anónimas (closure) antes de su inserción.
+     *
+     * @var array
+     */
+    private $_mutadores = [];
+
+    /**
+     * Indica las modificaciones de datos por medio de funciones 
+     * anónimas (closure) después de su obtención.
+     *
+     * @var array
+     */
+    private $_accesores = [];
 
     /**
      * Crea una nueva instancia de la clase HTML.
@@ -370,6 +388,44 @@ class HTML
     }
 
     /**
+     * Establece las modificaciones de datos por medio de funciones 
+     * anónimas (closure) antes de su inserción.
+     *
+     * @param array $mutadores mutadores
+     * 
+     * @return $this
+     */
+    public function mutadores($mutadores)
+    {
+        foreach ($mutadores as $clave => $valor) {
+            if ($valor instanceof Closure) {
+                $this->_mutadores[$clave] = serializarClosure($valor);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Establece las modificaciones de datos por medio de funciones 
+     * anónimas (closure) después de su obtención.
+     *
+     * @param array $accesores accesores
+     * 
+     * @return $this
+     */
+    public function accesores($accesores)
+    {
+        foreach ($accesores as $clave => $valor) {
+            if ($valor instanceof Closure) {
+                $this->_accesores[$clave] = serializarClosure($valor);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * Renderiza la tabla especificada con su respectiva configuración.
      *
      * @return void
@@ -486,7 +542,9 @@ class HTML
             'actualizadoEn' => $this->_actualizadoEn,
             'ordenarPor' => $this->_ordenarPor,
             'acciones' => $this->_acciones,
-            'titulo' => $this->_titulo
+            'titulo' => $this->_titulo,
+            'mutadores' => $this->_mutadores,
+            'accesores' => $this->_accesores
         ];
 
         return json_encode($atributos);

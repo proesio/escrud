@@ -4,7 +4,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -22,9 +22,9 @@ function alerta(datos) {
 
   alerta.style.display = 'block';
 
-  const html = `<div class="alerta alerta-${datos.tipo}">
-    <div class="contenido">${datos.texto}</div>
-    <div class="cerrar-alerta" onclick="cerrarAlerta(${datos.elementoId})">&times;</div>
+  const html = `<div class="escrud-alerta escrud-alerta-${datos.tipo}">
+    <div class="escrud-contenido">${datos.texto}</div>
+    <div class="escrud-cerrar-alerta" onclick="cerrarAlerta(${datos.elementoId})">&times;</div>
   </div>`;
 
   alerta.innerHTML = html;

@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -33,16 +33,16 @@ $busqueda = json_encode($peticion->busqueda);
 
 ?>
 
-<div class="contenedor-tabla">
+<div class="escrud-contenedor-tabla">
 
-<table class="tabla">
+<table class="escrud-tabla">
     <thead>
         <tr>
 
         <?php
 
         if ($peticion->atributos->acciones->acciones) :
-            echo '<th>'.$peticion->textos['ACCIONES'].'</th>';
+            echo '<th class="escrud-skicty"><span>'.$peticion->textos['ACCIONES'].'</span></th>';
         endif;
 
         foreach ($peticion->encabezado as $columna) :
@@ -59,7 +59,7 @@ $busqueda = json_encode($peticion->busqueda);
         <tr>
 
         <?php if ($peticion->atributos->acciones->acciones) : ?>
-            <th>
+            <th class="escrud-skicty">
 
             <?php if ($peticion->atributos->acciones->eliminar) : ?>
             <input 
@@ -84,9 +84,9 @@ $busqueda = json_encode($peticion->busqueda);
         ?>
             <th>
                 <input
-                    type="text" 
+                    type="search" 
                     id="<?=$columna.$elementoId; ?>"
-                    class="buscador"
+                    class="escrud-buscador"
                     placeholder="<?=$peticion->textos['BUSQUEDA_RAPIDA']; ?>"
                     onkeyup='buscar({
                         inicio: <?=$peticion->inicio; ?>,
@@ -102,7 +102,7 @@ $busqueda = json_encode($peticion->busqueda);
         <?php
 
             elseif ($titulo) :
-                echo '<th><input type="text" class="buscador" disabled/></th>';
+                echo '<th><input type="text" class="escrud-buscador escrud-display-none" disabled/></th>';
             endif;
 
         endforeach;
@@ -112,13 +112,15 @@ $busqueda = json_encode($peticion->busqueda);
     </thead>
     <tbody>
 
+    <?php if ($peticion->registros) : ?>
+
     <?php foreach ($peticion->registros as $registro) : ?>
     <?php $registroPivote = json_encode($registro); ?>
-        <tr class="tr">
+        <tr class="escrud-tr">
 
         <?php if ($peticion->atributos->acciones->acciones) : ?>    
-            <td>
-                <div class="display-flex">
+            <td class="escrud-skicty">
+                <div class="escrud-display-flex">
 
                 <?php if ($peticion->atributos->acciones->eliminar) : ?>
                     <input 
@@ -129,9 +131,44 @@ $busqueda = json_encode($peticion->busqueda);
                             "<?='check'.$elementoId.($registro->{$peticion->atributos->llavePrimaria}); ?>"
                         )'
                         type="checkbox" 
-                        class="m-r-20"/>
+                        class="escrud-m-r-15"/>
                 <?php endif; ?>
-                <?php include 'menu.php'; ?>
+
+                <?php if ($peticion->atributos->acciones->editar) : ?>
+
+                <button
+                    onclick='abrirModalEditar({
+                        modalId: "<?='modal-editar'.$elementoId; ?>",
+                        valorLlavePrimaria: <?=$registro->{$peticion->atributos->llavePrimaria}; ?>,
+                        encabezado: <?=$encabezado; ?>,
+                        atributos: <?=$atributos; ?>,
+                        config: <?=$config; ?>,
+                        textos: <?=$textos; ?>
+                    })'
+                    class="escrud-btn escrud-btn-editar">
+                    <?=$peticion->textos['EDITAR']; ?>
+                </button>
+
+                <?php endif; ?>
+
+                <span class="escrud-m-r-5"></span>
+
+                <?php if ($peticion->atributos->acciones->eliminar) : ?>
+
+                <button
+                    onclick='abrirModalEliminar({
+                        modalId: "<?='modal-eliminar'.$elementoId; ?>",
+                        valorLlavesPrimarias: [<?=$registro->{$peticion->atributos->llavePrimaria}; ?>],
+                        encabezado: <?=$encabezado; ?>,
+                        atributos: <?=$atributos; ?>,
+                        config: <?=$config; ?>,
+                        textos: <?=$textos; ?>
+                    })'
+                    class="escrud-btn escrud-btn-eliminar">
+                    <?=$peticion->textos['ELIMINAR']; ?>
+                </button>
+
+                <?php endif; ?>
 
                 </div>
             </td>
@@ -158,6 +195,14 @@ $busqueda = json_encode($peticion->busqueda);
         </tr>
 
     <?php endforeach; ?>
+
+    <?php else : ?>
+        <tr>
+            <td class="escrud-td-texto" colspan="<?=count($peticion->encabezado) + 1; ?>">
+                <?=$peticion->textos['NO_HAY_REGISTROS']; ?>
+            </td>
+        </tr>
+    <?php endif; ?>
 
     </tbody>
 </table>

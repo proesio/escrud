@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -28,7 +28,7 @@ return [
     'ELIMINAR_REGISTRO' => 'Delete record',
     'CONFIRMAR' => 'Confirm',
     'CANCELAR' => 'Cancel',
-    'CONFIRMACION_ELIMINACION_REGISTRO' => 'Are you sure you want to delete the record(s)?',
+    'CONFIRMACION_ELIMINACION_REGISTRO' => 'Are you sure you want to delete %d record(s)?',
     'TABLA_NO_EXISTE' => 'The following table does not exist:',
     'CAMPO_NO_EXISTE' => 'The following field does not exist:',
     'CARGANDO' => 'Loading...',
@@ -36,5 +36,6 @@ return [
     'REGISTRO_CREADO_EXITOSAMENTE' => 'Record created successfully.',
     'REGISTRO_EDITADO_EXITOSAMENTE' => 'Record edited successfully.',
     'REGISTRO_ELIMINADO_EXITOSAMENTE' => 'Record(s) deleted successfully.',
-    'BUSQUEDA_RAPIDA' => 'Quick search'
+    'BUSQUEDA_RAPIDA' => 'Quick search',
+    'NO_HAY_REGISTROS' => 'There are no records'
 ];

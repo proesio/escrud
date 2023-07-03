@@ -4,7 +4,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -17,7 +17,11 @@
  * @return void
  */
 function abrirModalCrear(datos) {
+  const elementoId = datos.atributos.elementoId;
   const url = `${datos.config.ENTORNO.URL_BASE}Vistas/modal_crear.php`;
+
+  barraCargando(`barra-cargando-superior${elementoId}`);
+  barraCargando(`barra-cargando-inferior${elementoId}`);
 
   const xhr = new XMLHttpRequest();
   xhr.open('POST', url, true);
@@ -26,8 +30,11 @@ function abrirModalCrear(datos) {
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4) {
       document.getElementById(
-        `modal${datos.atributos.elementoId}`
+        `modal${elementoId}`
       ).innerHTML = xhr.responseText;
+
+      barraCargando(`barra-cargando-superior${elementoId}`, false);
+      barraCargando(`barra-cargando-inferior${elementoId}`, false);
     }
   }
 }
@@ -40,9 +47,13 @@ function abrirModalCrear(datos) {
  * @return void
  */
 async function abrirModalEditar(datos) {
+  const elementoId = datos.atributos.elementoId;
   const url = `${datos.config.ENTORNO.URL_BASE}Vistas/modal_editar.php`;
-  const respuesta = await obtenerRegistro(datos);
 
+  barraCargando(`barra-cargando-superior${elementoId}`);
+  barraCargando(`barra-cargando-inferior${elementoId}`);
+
+  const respuesta = await obtenerRegistro(datos);
   datos.registro = respuesta.datos;
 
   const xhr = new XMLHttpRequest();
@@ -52,8 +63,11 @@ async function abrirModalEditar(datos) {
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4) {
       document.getElementById(
-        `modal${datos.atributos.elementoId}`
+        `modal${elementoId}`
       ).innerHTML = xhr.responseText;
+
+      barraCargando(`barra-cargando-superior${elementoId}`, false);
+      barraCargando(`barra-cargando-inferior${elementoId}`, false);
     }
   }
 }
@@ -66,7 +80,11 @@ async function abrirModalEditar(datos) {
  * @return void
  */
 function abrirModalEliminar(datos) {
+  const elementoId = datos.atributos.elementoId;
   const url = `${datos.config.ENTORNO.URL_BASE}Vistas/modal_eliminar.php`;
+
+  barraCargando(`barra-cargando-superior${elementoId}`);
+  barraCargando(`barra-cargando-inferior${elementoId}`);
 
   if (datos.masivo) {
     let i = 0;
@@ -75,7 +93,7 @@ function abrirModalEliminar(datos) {
 
     registrosTabla.forEach((elemento) => {
       const check = document.getElementById(
-        `check${datos.atributos.elementoId}${elemento[datos.atributos.llavePrimaria]}`
+        `check${elementoId}${elemento[datos.atributos.llavePrimaria]}`
       );
 
       if (check.checked) {
@@ -92,8 +110,11 @@ function abrirModalEliminar(datos) {
   xhr.send(JSON.stringify(datos));
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4) {
-      document.getElementById(`modal${datos.atributos.elementoId}`).innerHTML = xhr.responseText;
+      document.getElementById(`modal${elementoId}`).innerHTML = xhr.responseText;
     }
+
+    barraCargando(`barra-cargando-superior${elementoId}`, false);
+    barraCargando(`barra-cargando-inferior${elementoId}`, false);
   }
 }
 

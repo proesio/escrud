@@ -4,16 +4,16 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
 
-.contenedor-barra {
+.escrud-contenedor-barra {
   height: 5px;
 }
 
-.barra {
+.escrud-barra {
   width: 100%;
   height: 5px;
   overflow: hidden;
@@ -21,7 +21,7 @@
   margin: auto;
 }
 
-.barra .animacion {
+.escrud-barra .escrud-animacion {
   width: 150%;
   margin-left: 130px;
   animation-name: animacion;
@@ -46,7 +46,7 @@
   -moz-animation-direction: alternate-reverse;
 }
 
-.barra .lineas {
+.escrud-barra .escrud-lineas {
   background-color: #5F9BFE;
   float: left;
   width: 15px;

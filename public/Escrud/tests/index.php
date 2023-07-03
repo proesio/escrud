@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.0.0
+ * @version   GIT:  2.6.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -52,6 +52,28 @@ try {
         )
         ->ordenarPor('id', 'desc')
         ->titulo('Mysql - usuarios')
+        ->mutadores(
+            [
+                'nombres' => function ($valor) {
+                    return strtoupper($valor);
+                },
+                'apellidos' => function ($valor) {
+                    return strtoupper($valor);
+                }
+            ]
+        )
+        ->accesores(
+            [
+                'creado_en' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                },
+                'actualizado_en' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                }
+            ]
+        )
         ->renderizar();
 
     Escrud::conexion('pgsql')
@@ -72,6 +94,28 @@ try {
         )
         ->ordenarPor('id', 'desc')
         ->titulo('Pgsql - usuarios')
+        ->mutadores(
+            [
+                'nombres' => function ($valor) {
+                    return strtoupper($valor);
+                },
+                'apellidos' => function ($valor) {
+                    return strtoupper($valor);
+                }
+            ]
+        )
+        ->accesores(
+            [
+                'creado_en' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                },
+                'actualizado_en' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                }
+            ]
+        )
         ->renderizar();
 
     Escrud::conexion('sqlite')
@@ -92,6 +136,28 @@ try {
         )
         ->ordenarPor('id', 'desc')
         ->titulo('Sqlite - usuarios')
+        ->mutadores(
+            [
+                'nombres' => function ($valor) {
+                    return strtoupper($valor);
+                },
+                'apellidos' => function ($valor) {
+                    return strtoupper($valor);
+                }
+            ]
+        )
+        ->accesores(
+            [
+                'creado_en' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                },
+                'actualizado_en' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                }
+            ]
+        )
         ->renderizar();
 
     Escrud::conexion('sqlsrv')
@@ -112,6 +178,28 @@ try {
         )
         ->ordenarPor('id', 'desc')
         ->titulo('Sqlsrv - usuarios')
+        ->mutadores(
+            [
+                'nombres' => function ($valor) {
+                    return strtoupper($valor);
+                },
+                'apellidos' => function ($valor) {
+                    return strtoupper($valor);
+                }
+            ]
+        )
+        ->accesores(
+            [
+                'creado_en' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                },
+                'actualizado_en' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                }
+            ]
+        )
         ->renderizar();
 
     Escrud::conexion('mysql')
@@ -135,6 +223,28 @@ try {
         ->actualizadoEn('fecha_actualizacion')
         ->ordenarPor('codigo', 'desc')
         ->titulo('Mysql - usuario')
+        ->mutadores(
+            [
+                'nombres' => function ($valor) {
+                    return strtoupper($valor);
+                },
+                'apellidos' => function ($valor) {
+                    return strtoupper($valor);
+                }
+            ]
+        )
+        ->accesores(
+            [
+                'fecha_creacion' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                },
+                'fecha_actualizacion' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                }
+            ]
+        )
         ->renderizar();
 
     Escrud::conexion('pgsql')
@@ -158,6 +268,28 @@ try {
         ->actualizadoEn('fecha_actualizacion')
         ->ordenarPor('codigo', 'desc')
         ->titulo('Pgsql - usuario')
+        ->mutadores(
+            [
+                'nombres' => function ($valor) {
+                    return strtoupper($valor);
+                },
+                'apellidos' => function ($valor) {
+                    return strtoupper($valor);
+                }
+            ]
+        )
+        ->accesores(
+            [
+                'fecha_creacion' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                },
+                'fecha_actualizacion' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                }
+            ]
+        )
         ->renderizar();
 
     Escrud::conexion('sqlite')
@@ -181,6 +313,28 @@ try {
         ->actualizadoEn('fecha_actualizacion')
         ->ordenarPor('codigo', 'desc')
         ->titulo('Sqlite - usuario')
+        ->mutadores(
+            [
+                'nombres' => function ($valor) {
+                    return strtoupper($valor);
+                },
+                'apellidos' => function ($valor) {
+                    return strtoupper($valor);
+                }
+            ]
+        )
+        ->accesores(
+            [
+                'fecha_creacion' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                },
+                'fecha_actualizacion' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                }
+            ]
+        )
         ->renderizar();
 
     Escrud::conexion('sqlsrv')
@@ -204,6 +358,28 @@ try {
         ->actualizadoEn('fecha_actualizacion')
         ->ordenarPor('codigo', 'desc')
         ->titulo('Sqlsrv - usuario')
+        ->mutadores(
+            [
+                'nombres' => function ($valor) {
+                    return strtoupper($valor);
+                },
+                'apellidos' => function ($valor) {
+                    return strtoupper($valor);
+                }
+            ]
+        )
+        ->accesores(
+            [
+                'fecha_creacion' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                },
+                'fecha_actualizacion' => function ($valor) {
+                    $dateTime = new DateTime($valor);
+                    return $dateTime->format('d-m-Y H:i:s');
+                }
+            ]
+        )
         ->renderizar();
 } catch (EscrudExcepcion $e) {
     dd($e->getMessage());
