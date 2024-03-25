@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -20,18 +20,18 @@ use function Escrud\Funciones\obtenerCasillaEncabezado;
 $peticion = file_get_contents('php://input');
 $peticion = json_decode($peticion);
 $peticion->textos = (array) $peticion->textos;
-$elementoId = $peticion->atributos->elementoId;
+$elementoId = $peticion->propiedades->elementoId;
 $encabezado = json_encode($peticion->encabezado);
-$atributos = json_encode($peticion->atributos);
+$propiedades = json_encode($peticion->propiedades);
 $config = json_encode($peticion->config);
 $textos = json_encode($peticion->textos);
 
 ?>
 
-<div id="<?='modal-crear'.$elementoId; ?>" class="escrud-modal">
+<div id="<?='escrud-modal-crear'.$elementoId; ?>" class="escrud-modal">
     <div class="escrud-encabezado">
         <span class="escrud-titulo"><?=$peticion->textos['CREAR_REGISTRO']; ?></span>
-        <span onclick="cerrarModal('<?='modal-crear'.$elementoId; ?>')" class="escrud-cerrar-modal">&times;</span>
+        <span onclick="cerrarModal('<?='escrud-modal-crear'.$elementoId; ?>')" class="escrud-cerrar-modal">&times;</span>
     </div>
 
     <div class="escrud-contenido-modal">
@@ -41,15 +41,15 @@ $textos = json_encode($peticion->textos);
             foreach ($peticion->encabezado as $columna) :
                 $condicion = (
                     (
-                        $columna != $peticion->atributos->creadoEn
-                        && $columna != $peticion->atributos->actualizadoEn
-                        && in_array($columna, $peticion->atributos->insertables)
+                        $columna != $peticion->propiedades->creadoEn
+                        && $columna != $peticion->propiedades->actualizadoEn
+                        && in_array($columna, $peticion->propiedades->insertables)
                     )
                     || 
                     (
-                        $columna != $peticion->atributos->creadoEn
-                        && $columna != $peticion->atributos->actualizadoEn
-                        && empty($peticion->atributos->insertables)
+                        $columna != $peticion->propiedades->creadoEn
+                        && $columna != $peticion->propiedades->actualizadoEn
+                        && empty($peticion->propiedades->insertables)
                     )
                 );
 
@@ -57,10 +57,10 @@ $textos = json_encode($peticion->textos);
 
             ?>
                 <label class="escrud-etiqueta">
-                    <?=obtenerCasillaEncabezado($columna, $peticion->atributos) ?? $columna; ?>
+                    <?=obtenerCasillaEncabezado($columna, $peticion->propiedades) ?? $columna; ?>
                     <input
                         type="text"
-                        id="<?='campo-'.$columna.$elementoId; ?>"
+                        id="<?='escrud-campo-'.$columna.$elementoId; ?>"
                         class="escrud-campo-texto"
                     />
                 </label>
@@ -78,13 +78,13 @@ $textos = json_encode($peticion->textos);
     <div class="escrud-pie-pagina">
         <div class="escrud-contenido-pie-pagina">
             <button
-                id="<?='btn-guardar'.$elementoId; ?>"
+                id="<?='escrud-btn-guardar'.$elementoId; ?>"
                 onclick='crear({
-                    btnId: "<?='btn-guardar'.$elementoId; ?>",
-                    modalId: "<?='modal-crear'.$elementoId; ?>",
+                    btnId: "<?='escrud-btn-guardar'.$elementoId; ?>",
+                    modalId: "<?='escrud-modal-crear'.$elementoId; ?>",
                     btnTexto: "<?=$peticion->textos['GUARDAR']; ?>",
                     encabezado: <?=$encabezado; ?>,
-                    atributos: <?=$atributos; ?>,
+                    propiedades: <?=$propiedades; ?>,
                     config: <?=$config; ?>,
                     textos: <?=$textos; ?>
                 })'

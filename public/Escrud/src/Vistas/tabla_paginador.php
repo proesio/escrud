@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -30,7 +30,7 @@
             cantidad: this.value,
             busqueda: <?=$busqueda; ?>,
             encabezado: <?=$encabezado; ?>,
-            atributos: <?=$atributos; ?>,
+            propiedades: <?=$propiedades; ?>,
             config: <?=$config; ?>,
             textos: <?=$textos; ?>
         })'>
@@ -68,7 +68,7 @@ $cantidadPaginas = ($peticion->paginado->total ? $peticion->inicio + 1 : 0)
         cantidad: <?=$peticion->cantidad; ?>,
         busqueda: <?=$busqueda; ?>,
         encabezado: <?=$encabezado; ?>,
-        atributos: <?=$atributos; ?>,
+        propiedades: <?=$propiedades; ?>,
         config: <?=$config; ?>,
         textos: <?=$textos; ?>
     })'
@@ -84,7 +84,7 @@ $cantidadPaginas = ($peticion->paginado->total ? $peticion->inicio + 1 : 0)
         cantidad: <?=$peticion->cantidad; ?>,
         busqueda: <?=$busqueda; ?>,
         encabezado: <?=$encabezado; ?>,
-        atributos: <?=$atributos; ?>,
+        propiedades: <?=$propiedades; ?>,
         config: <?=$config; ?>,
         textos: <?=$textos; ?>
     })'

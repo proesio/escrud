@@ -4,7 +4,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -17,7 +17,7 @@
  * @return void
  */
 function renderizarTabla(datos) {
-  const elementoId = datos.atributos.elementoId;
+  const elementoId = datos.propiedades.elementoId;
   const url = `${datos.config.ENTORNO.URL_BASE}Vistas/tabla_estructura.php`;
 
   const xhr = new XMLHttpRequest();
@@ -26,13 +26,13 @@ function renderizarTabla(datos) {
   xhr.send(JSON.stringify(datos));
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4) {
-      document.getElementById(`tabla${elementoId}`).innerHTML = xhr.responseText;
-      document.getElementById(`btn-eliminar-seleccion${elementoId}`).style.display = 'none';
-      barraCargando(`barra-cargando-superior${elementoId}`, false);
-      barraCargando(`barra-cargando-inferior${elementoId}`, false);
+      document.getElementById(`escrud-tabla${elementoId}`).innerHTML = xhr.responseText;
+      document.getElementById(`escrud-btn-eliminar-seleccion${elementoId}`).style.display = 'none';
+      barraCargando(`escrud-barra-cargando-superior${elementoId}`, false);
+      barraCargando(`escrud-barra-cargando-inferior${elementoId}`, false);
 
       if (datos.busqueda && datos.busqueda.valor) {
-        const busqueda = document.getElementById(`${datos.busqueda.campo}${elementoId}`);
+        const busqueda = document.getElementById(`escrud-busqueda${datos.busqueda.campo}${elementoId}`);
 
         busqueda.value = datos.busqueda.valor;
         busqueda.focus();

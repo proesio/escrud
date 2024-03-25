@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -16,8 +16,7 @@
 use Escrud\Clases\Texto;
 use function Escrud\Funciones\urlBase;
 
-$config = json_decode($html->_obtenerConfiguracion(), true);
-$atributos = json_decode($html->_obtenerAtributos(), true);
+$propiedades = json_decode($html->_obtenerPropiedades(), true);
 
 ?>
 
@@ -45,20 +44,20 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
 
 <div class="escrud-contenedor-titulo">
     <strong>
-        <?=$atributos['titulo'] 
-            ? substr($atributos['titulo'], 0, 60) 
-            : substr($atributos['tabla'], 0, 60); ?>
+        <?=$propiedades['titulo'] 
+            ? substr($propiedades['titulo'], 0, 60) 
+            : substr($propiedades['tabla'], 0, 60); ?>
     </strong>
 </div>
 
 <div class="escrud-contenedor-acciones">
 
-<?php if ($atributos['acciones']['acciones'] && $atributos['acciones']['crear']) : ?>
+<?php if ($propiedades['acciones']['acciones'] && $propiedades['acciones']['crear']) : ?>
 
 <button
     onclick='abrirModalCrear({
         encabezado: <?=$html->_obtenerEncabezado(); ?>,
-        atributos: <?=$html->_obtenerAtributos(); ?>,
+        propiedades: <?=$html->_obtenerPropiedades(); ?>,
         config: <?=$html->_obtenerConfiguracion(); ?>,
         textos: <?=Texto::obtenerTextos(); ?>
     })'
@@ -69,12 +68,12 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
 <?php endif; ?>
 
 <button 
-    id="<?='btn-eliminar-seleccion'.$html->_elementoId; ?>" 
+    id="<?='escrud-btn-eliminar-seleccion'.$html->_elementoId; ?>" 
     class="escrud-btn escrud-btn-eliminar escrud-display-none"
     onclick='abrirModalEliminar({
-        modalId: "<?='modal-eliminar'.$html->_elementoId; ?>",
+        modalId: "<?='escrud-modal-eliminar'.$html->_elementoId; ?>",
         encabezado: <?=$html->_obtenerEncabezado(); ?>,
-        atributos: <?=$html->_obtenerAtributos(); ?>,
+        propiedades: <?=$html->_obtenerPropiedades(); ?>,
         config: <?=$html->_obtenerConfiguracion(); ?>,
         textos: <?=Texto::obtenerTextos(); ?>,
         masivo: true
@@ -84,7 +83,7 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
 
 </div>
 
-<div id="<?='tabla'.$html->_elementoId; ?>"></div>
+<div id="<?='escrud-tabla'.$html->_elementoId; ?>"></div>
 
 <div class="escrud-contenedor-barra">
 
@@ -95,9 +94,9 @@ $atributos = json_decode($html->_obtenerAtributos(), true);
 
 </div>
 
-<div id="<?='modal'.$html->_elementoId; ?>"></div>
+<div id="<?='escrud-modal'.$html->_elementoId; ?>"></div>
 
-<div id="<?='alerta'.$html->_elementoId; ?>"></div>
+<div id="<?='escrud-alerta'.$html->_elementoId; ?>"></div>
 
 <script type="text/javascript" src="<?=urlBase('js/util.js'); ?>"></script>
 <script type="text/javascript" src="<?=urlBase('js/tabla.js'); ?>"></script>
@@ -116,32 +115,29 @@ setTimeout(() => {
         cantidad: 5,
         busqueda: '',
         encabezado: <?=$html->_obtenerEncabezado(); ?>,
-        atributos: <?=$html->_obtenerAtributos(); ?>,
+        propiedades: <?=$html->_obtenerPropiedades(); ?>,
         config: <?=$html->_obtenerConfiguracion(); ?>,
         textos: <?=Texto::obtenerTextos(); ?>,
         cargaInicial: true
     });
-}, (<?=$html->_elementoId; ?>) * 1000);
+}, (<?=$html->_elementoId; ?>) * 100);
 
 async function inicializarTabla(datos) {
-    const elementoId = Number(datos.atributos.elementoId);
+    const elementoId = Number(datos.propiedades.elementoId);
 
-    barraCargando(`barra-cargando-superior${elementoId}`);
-    barraCargando(`barra-cargando-inferior${elementoId}`);
+    barraCargando(`escrud-barra-cargando-superior${elementoId}`);
+    barraCargando(`escrud-barra-cargando-inferior${elementoId}`);
 
     if (datos.busqueda && datos.busqueda.valor) {
         const busqueda = document.getElementById(
-            `${datos.busqueda.campo}${elementoId}`
+            `escrud-busqueda${datos.busqueda.campo}${elementoId}`
         );
 
         busqueda.disabled = true;
     }
 
-    const registros = (await obtenerRegistros(datos)).datos;
-    const paginado = (await obtenerPaginado(datos)).datos;
-
-    datos.registros = registros;
-    datos.paginado = paginado;
+    datos.registros = (await obtenerRegistros(datos)).datos;
+    datos.paginado = (await obtenerPaginado(datos)).datos;
 
     renderizarTabla(datos);
 }

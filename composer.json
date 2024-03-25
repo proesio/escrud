@@ -26,6 +26,6 @@
             "public/Escrud/src/inicializador.php"
         ]
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

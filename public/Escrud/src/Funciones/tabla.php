@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -43,21 +43,21 @@ function obtenerPaginado($cantidadRegistros)
 
 /**
  * Verifica y obtiene la casilla del encabezado 
- * según los atributos visibles y ocultos.
+ * según los propiedades visibles y ocultos.
  *
- * @param string $columna   columna
- * @param object $atributos atributos
+ * @param string $columna     columna
+ * @param object $propiedades propiedades
  * 
  * @return string|null
  */
-function obtenerCasillaEncabezado($columna, $atributos)
+function obtenerCasillaEncabezado($columna, $propiedades)
 {
-    $condicion = !empty($atributos->visibles)
-        ? in_array($columna, $atributos->visibles)
-        : !in_array($columna, $atributos->ocultos);
+    $condicion = !empty($propiedades->visibles)
+        ? in_array($columna, $propiedades->visibles)
+        : !in_array($columna, $propiedades->ocultos);
 
     if ($condicion) {
-        foreach ($atributos->alias as $clave => $valor) {
+        foreach ($propiedades->alias as $clave => $valor) {
             if ($columna == $clave) {
                 $columna = $valor;
                 break;
@@ -73,31 +73,31 @@ function obtenerCasillaEncabezado($columna, $atributos)
 /**
  * Verifica las columnas que pueden ser buscadas.
  *
- * @param string $columna   columna
- * @param object $atributos atributos
+ * @param string $columna     columna
+ * @param object $propiedades propiedades
  * 
  * @return boolean
  */
-function validarCampoBuscable($columna, $atributos)
+function validarCampoBuscable($columna, $propiedades)
 {
-    return !empty($atributos->buscables)
-        ? in_array($columna, $atributos->buscables)
-        : !in_array($columna, $atributos->noBuscables);
+    return !empty($propiedades->buscables)
+        ? in_array($columna, $propiedades->buscables)
+        : !in_array($columna, $propiedades->noBuscables);
 }
 
 /**
- * Valida la casilla del registro según los atributos visibles y ocultos.
+ * Valida la casilla del registro según los propiedades visibles y ocultos.
  *
- * @param string $columna   columna
- * @param object $atributos atributos
+ * @param string $columna     columna
+ * @param object $propiedades propiedades
  * 
  * @return boolean
  */
-function validarCasillaRegistro($columna, $atributos)
+function validarCasillaRegistro($columna, $propiedades)
 {
-    $condicion = !empty($atributos->visibles)
-        ? in_array($columna, $atributos->visibles)
-        : !in_array($columna, $atributos->ocultos);
+    $condicion = !empty($propiedades->visibles)
+        ? in_array($columna, $propiedades->visibles)
+        : !in_array($columna, $propiedades->ocultos);
 
     if ($condicion && $columna != '__ID__') {
         return true;

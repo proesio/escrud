@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -45,9 +45,9 @@ class Peticion
         $this->_peticion = $peticion;
 
         Tabla::$tabla = $peticion->config['BD_TABLA'];
-        Tabla::$llavePrimaria = $peticion->atributos['llavePrimaria'];
-        Tabla::$creadoEn = $peticion->atributos['creadoEn'];
-        Tabla::$actualizadoEn = $peticion->atributos['actualizadoEn'];
+        Tabla::$llavePrimaria = $peticion->propiedades['llavePrimaria'];
+        Tabla::$creadoEn = $peticion->propiedades['creadoEn'];
+        Tabla::$actualizadoEn = $peticion->propiedades['actualizadoEn'];
     }
 
     /**
@@ -59,7 +59,7 @@ class Peticion
     {
         $tabla = Tabla::seleccionar('*');
 
-        $ordenes = $this->_peticion->atributos['ordenarPor'];
+        $ordenes = $this->_peticion->propiedades['ordenarPor'];
 
         if (is_array($ordenes) && !empty($ordenes)) {
             $tabla->ordenarPor($ordenes['ordenes'], $ordenes['tipo']);
@@ -74,7 +74,7 @@ class Peticion
         );
 
         $registros = $tabla->obtener();
-        $accesores = $this->_peticion->atributos['accesores'];
+        $accesores = $this->_peticion->propiedades['accesores'];
 
         if ($accesores) {
             foreach ($registros as $claveRegistro => $valorRegistro) {
@@ -99,7 +99,7 @@ class Peticion
     public function obtenerRegistro()
     {
         $registro = Tabla::donde(
-            $this->_peticion->atributos['llavePrimaria'].' = ?',
+            $this->_peticion->propiedades['llavePrimaria'].' = ?',
             [$this->_peticion->valorLlavePrimaria]
         )->primero();
 
@@ -115,7 +115,7 @@ class Peticion
     {
         try {
             $registro = json_decode($this->_peticion->registro, true);
-            $mutadores = $this->_peticion->atributos['mutadores'];
+            $mutadores = $this->_peticion->propiedades['mutadores'];
 
             if ($mutadores) {
                 foreach ($mutadores as $clave => $valor) {
@@ -148,7 +148,7 @@ class Peticion
     {
         try {
             $registro = (array) $this->_peticion->registro;
-            $mutadores = $this->_peticion->atributos['mutadores'];
+            $mutadores = $this->_peticion->propiedades['mutadores'];
 
             if ($mutadores) {
                 foreach ($mutadores as $clave => $valor) {
@@ -158,7 +158,7 @@ class Peticion
             }
 
             Tabla::donde(
-                $this->_peticion->atributos['llavePrimaria'].' = ?',
+                $this->_peticion->propiedades['llavePrimaria'].' = ?',
                 [$this->_peticion->valorLlavePrimaria]
             )
             ->actualizar($registro);
@@ -226,6 +226,8 @@ class Peticion
      */
     private function _respuesta($estado, $datos = null, $mensaje = null)
     {
+        header('Content-Type: application/json; charset=utf-8');
+
         return json_encode(
             [
                 'estado' => $estado,

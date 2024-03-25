@@ -4,7 +4,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -26,9 +26,9 @@ function crear(datos) {
   xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded; charset=UTF-8');
   xhr.send(convertirJsonAUrl({
     api: 'crear',
-    registro: JSON.stringify(obtenerDatosRegistro(datos.encabezado, datos.atributos, 'insertables')),
+    registro: JSON.stringify(obtenerDatosRegistro(datos.encabezado, datos.propiedades, 'insertables')),
     config: JSON.stringify(datos.config),
-    atributos: JSON.stringify(datos.atributos)
+    propiedades: JSON.stringify(datos.propiedades)
   }));
   xhr.onreadystatechange = () => {
     if (xhr.readyState == 4) {

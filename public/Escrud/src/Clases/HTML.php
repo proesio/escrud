@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -18,6 +18,7 @@ namespace Escrud\Clases;
 use Closure;
 use PIPE\Clases\PIPE;
 use Escrud\Clases\Excepciones\Escrud;
+use function Escrud\Funciones\encriptar;
 use function Escrud\Funciones\obtenerEntorno;
 use function Escrud\Funciones\serializarClosure;
 
@@ -521,13 +522,13 @@ class HTML
     }
 
     /**
-     * Obtiene los atributos de la clase HTML.
+     * Obtiene los propiedades de la clase HTML.
      *
      * @return string
      */
-    private function _obtenerAtributos()
+    private function _obtenerPropiedades()
     {
-        $atributos = [
+        $propiedades = [
             'elementoId' => $this->_elementoId,
             'tabla' => $this->_tabla,
             'llavePrimaria' => $this->_llavePrimaria,
@@ -547,7 +548,7 @@ class HTML
             'accesores' => $this->_accesores
         ];
 
-        return json_encode($atributos);
+        return json_encode($propiedades);
     }
 
     /**
@@ -560,20 +561,23 @@ class HTML
         $entorno = include obtenerEntorno();
 
         $config = [
-            'BD_CONTROLADOR' => Configuracion::config('BD_CONTROLADOR'),
-            'BD_HOST' => Configuracion::config('BD_HOST'),
-            'BD_PUERTO' => Configuracion::config('BD_PUERTO'),
-            'BD_USUARIO' => Configuracion::config('BD_USUARIO'),
-            'BD_CONTRASENA' => Configuracion::config('BD_CONTRASENA'),
-            'BD_BASEDATOS' => Configuracion::config('BD_BASEDATOS'),
+            'BD_CONTROLADOR' => encriptar(Configuracion::config('BD_CONTROLADOR')),
+            'BD_HOST' => encriptar(Configuracion::config('BD_HOST')),
+            'BD_PUERTO' => encriptar(Configuracion::config('BD_PUERTO')),
+            'BD_USUARIO' => encriptar(Configuracion::config('BD_USUARIO')),
+            'BD_CONTRASENA' => encriptar(Configuracion::config('BD_CONTRASENA')),
+            'BD_BASEDATOS' => encriptar(Configuracion::config('BD_BASEDATOS')),
             'IDIOMA' => Configuracion::config('IDIOMA'),
-            'RUTA_MODELOS' => __DIR__.'/Modelos',
+            'RUTA_MODELOS' => encriptar(__DIR__.'/Modelos'),
             'ZONA_HORARIA' => Configuracion::config('ZONA_HORARIA'),
             'COMANDO_INICIAL' => Configuracion::config('COMANDO_INICIAL'),
             'TIPO_RETORNO' => PIPE::OBJETO,
             'OPCIONES' => Configuracion::config('OPCIONES') ?? [],
             'BD_TABLA' => $this->_tabla,
-            'ENTORNO' => $entorno
+            'ENTORNO' => [
+                'URL_BASE' => $entorno['URL_BASE'],
+                'RUTA_PETICIONES' => $entorno['RUTA_PETICIONES'],
+            ]
         ];
 
         return json_encode($config);

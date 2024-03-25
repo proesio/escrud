@@ -4,7 +4,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -85,28 +85,28 @@ function barraCargando(elementoId, activar = true) {
  * Filtra y obtiene los registros en regla para ser gestionados.
  *
  * @param object encabezado
- * @param object atributos
+ * @param object propiedades
  * @param string contexto
  * 
  * @return object
  */
-function obtenerDatosRegistro(encabezado, atributos, contexto) {
+function obtenerDatosRegistro(encabezado, propiedades, contexto) {
   const registro = {};
 
   encabezado.forEach((columna) => {
     if ((
-        columna != atributos.creadoEn
-        && columna != atributos.actualizadoEn
-        && atributos[contexto].includes(columna)
-      )
+      columna != propiedades.creadoEn
+      && columna != propiedades.actualizadoEn
+      && propiedades[contexto].includes(columna)
+    )
       ||
       (
-        columna != atributos.creadoEn
-        && columna != atributos.actualizadoEn
-        && atributos[contexto].length == 0
+        columna != propiedades.creadoEn
+        && columna != propiedades.actualizadoEn
+        && propiedades[contexto].length == 0
       )
     ) {
-      valor = document.getElementById(`campo-${columna}${atributos.elementoId}`).value;
+      valor = document.getElementById(`escrud-campo-${columna}${propiedades.elementoId}`).value;
       registro[columna] = valor ? valor : null;
     }
   });
@@ -133,7 +133,7 @@ function procesarRespuesta(respuesta, datos, textoExitoso) {
         cantidad: 5,
         busqueda: '',
         encabezado: datos.encabezado,
-        atributos: datos.atributos,
+        propiedades: datos.propiedades,
         config: datos.config,
         textos: datos.textos
       });
@@ -141,20 +141,20 @@ function procesarRespuesta(respuesta, datos, textoExitoso) {
       alerta({
         texto: textoExitoso,
         tipo: 'exito',
-        elementoId: datos.atributos.elementoId
+        elementoId: datos.propiedades.elementoId
       });
     } else {
       alerta({
         texto: respuesta.mensaje,
         tipo: 'error',
-        elementoId: datos.atributos.elementoId
+        elementoId: datos.propiedades.elementoId
       });
     }
   } else {
     alerta({
       texto: datos.textos.ERROR_DETECTADO,
       tipo: 'error',
-      elementoId: datos.atributos.elementoId
+      elementoId: datos.propiedades.elementoId
     });
   }
 
@@ -192,24 +192,24 @@ var registrosTabla = [];
  * Selecciona todos los registros mediante una casilla de verificación.
  *
  * @param object registros
- * @param object atributos
+ * @param object propiedades
  * 
  * @return void
  */
-function chequearTodo(registros, atributos) {
+function chequearTodo(registros, propiedades) {
   registrosTabla = registros;
 
   const chequeador = document.getElementById(
-    `check${atributos.elementoId}`
+    `escrud-check${propiedades.elementoId}`
   );
 
   const btnEliminarSeleccion = document.getElementById(
-    `btn-eliminar-seleccion${atributos.elementoId}`
+    `escrud-btn-eliminar-seleccion${propiedades.elementoId}`
   );
 
   registros.forEach((elemento) => {
     const check = document.getElementById(
-      `check${atributos.elementoId}${elemento[atributos.llavePrimaria]}`
+      `escrud-check${propiedades.elementoId}${elemento[propiedades.llavePrimaria]}`
     );
 
     if (check) {
@@ -228,29 +228,29 @@ function chequearTodo(registros, atributos) {
  * Selecciona cada registro mediante una casilla de verificación.
  *
  * @param object registros
- * @param object atributos
+ * @param object propiedades
  * @param string elementoId
  * 
  * @return void
  */
-function chequearRegistro(registros, atributos, elementoId) {
+function chequearRegistro(registros, propiedades, elementoId) {
   registrosTabla = registros;
 
   const check = document.getElementById(elementoId);
 
   const chequeador = document.getElementById(
-    `check${atributos.elementoId}`
+    `escrud-check${propiedades.elementoId}`
   );
 
   const btnEliminarSeleccion = document.getElementById(
-    `btn-eliminar-seleccion${atributos.elementoId}`
+    `escrud-btn-eliminar-seleccion${propiedades.elementoId}`
   );
 
   let chequeado = 0;
 
   registros.forEach((elemento) => {
     const checkPivote = document.getElementById(
-      `check${atributos.elementoId}${elemento[atributos.llavePrimaria]}`
+      `escrud-check${propiedades.elementoId}${elemento[propiedades.llavePrimaria]}`
     );
 
     if (checkPivote && checkPivote.checked) {

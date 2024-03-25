@@ -4,7 +4,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -18,7 +18,7 @@
  */
 function alerta(datos) {
   datos = validarDatos(datos);
-  const alerta = document.getElementById(`alerta${datos.elementoId}`);
+  const alerta = document.getElementById(`escrud-alerta${datos.elementoId}`);
 
   alerta.style.display = 'block';
 
@@ -57,7 +57,7 @@ function validarDatos(datos) {
  * @return void
  */
 function cerrarAlerta(elementoId) {
-  const alerta = document.getElementById(`alerta${elementoId}`);
+  const alerta = document.getElementById(`escrud-alerta${elementoId}`);
 
   if (alerta) {
     alerta.style.display = 'none';

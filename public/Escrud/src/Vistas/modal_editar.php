@@ -8,7 +8,7 @@
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.0
+ * @version   GIT:  2.6.7
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -21,18 +21,18 @@ $peticion = file_get_contents('php://input');
 $peticion = json_decode($peticion);
 $peticion->textos = (array) $peticion->textos;
 $peticion->registro = (array) $peticion->registro;
-$elementoId = $peticion->atributos->elementoId;
+$elementoId = $peticion->propiedades->elementoId;
 $encabezado = json_encode($peticion->encabezado);
-$atributos = json_encode($peticion->atributos);
+$propiedades = json_encode($peticion->propiedades);
 $config = json_encode($peticion->config);
 $textos = json_encode($peticion->textos);
 
 ?>
 
-<div id="<?='modal-editar'.$elementoId; ?>" class="escrud-modal">
+<div id="<?='escrud-modal-editar'.$elementoId; ?>" class="escrud-modal">
     <div class="escrud-encabezado">
         <span class="escrud-titulo"><?=$peticion->textos['EDITAR_REGISTRO']; ?></span>
-        <span onclick="cerrarModal('<?='modal-editar'.$elementoId; ?>')" class="escrud-cerrar-modal">&times;</span>
+        <span onclick="cerrarModal('<?='escrud-modal-editar'.$elementoId; ?>')" class="escrud-cerrar-modal">&times;</span>
     </div>
 
     <div class="escrud-contenido-modal">
@@ -42,15 +42,15 @@ $textos = json_encode($peticion->textos);
             foreach ($peticion->encabezado as $columna) :
                 $condicion = (
                     (
-                        $columna != $peticion->atributos->creadoEn
-                        && $columna != $peticion->atributos->actualizadoEn
-                        && in_array($columna, $peticion->atributos->actualizables)
+                        $columna != $peticion->propiedades->creadoEn
+                        && $columna != $peticion->propiedades->actualizadoEn
+                        && in_array($columna, $peticion->propiedades->actualizables)
                     )
                     || 
                     (
-                        $columna != $peticion->atributos->creadoEn
-                        && $columna != $peticion->atributos->actualizadoEn
-                        && empty($peticion->atributos->actualizables)
+                        $columna != $peticion->propiedades->creadoEn
+                        && $columna != $peticion->propiedades->actualizadoEn
+                        && empty($peticion->propiedades->actualizables)
                     )
                 );
 
@@ -58,10 +58,10 @@ $textos = json_encode($peticion->textos);
 
             ?>
                 <label class="escrud-etiqueta">
-                    <?=obtenerCasillaEncabezado($columna, $peticion->atributos) ?? $columna; ?>
+                    <?=obtenerCasillaEncabezado($columna, $peticion->propiedades) ?? $columna; ?>
                     <input
                         type="text"
-                        id="<?='campo-'.$columna.$elementoId; ?>"
+                        id="<?='escrud-campo-'.$columna.$elementoId; ?>"
                         value="<?=$peticion->registro[$columna]; ?>"
                         class="escrud-campo-texto"
                     />
@@ -79,14 +79,14 @@ $textos = json_encode($peticion->textos);
     <div class="escrud-pie-pagina">
         <div class="escrud-contenido-pie-pagina">
             <button
-                id="<?='btn-editar'.$elementoId; ?>"
+                id="<?='escrud-btn-editar'.$elementoId; ?>"
                 onclick='editar({
-                    btnId: "<?='btn-editar'.$elementoId; ?>",
-                    modalId: "<?='modal-editar'.$elementoId; ?>",
+                    btnId: "<?='escrud-btn-editar'.$elementoId; ?>",
+                    modalId: "<?='escrud-modal-editar'.$elementoId; ?>",
                     btnTexto: "<?=$peticion->textos['GUARDAR_CAMBIOS']; ?>",
                     valorLlavePrimaria: <?=$peticion->valorLlavePrimaria; ?>,
                     encabezado: <?=$encabezado; ?>,
-                    atributos: <?=$atributos; ?>,
+                    propiedades: <?=$propiedades; ?>,
                     config: <?=$config; ?>,
                     textos: <?=$textos; ?>
                 })'
