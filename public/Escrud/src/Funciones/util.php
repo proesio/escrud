@@ -205,7 +205,7 @@ function encriptar($datos)
     $iv = openssl_random_pseudo_bytes($ivLongitud);
 
     $encriptado = openssl_encrypt(
-        $datos, $entorno['CIFRADO_METODO'],
+        $datos ?? '', $entorno['CIFRADO_METODO'],
         $entorno['CIFRADO_CLAVE'], 0, $iv
     );
 
