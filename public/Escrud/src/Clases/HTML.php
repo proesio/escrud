@@ -3,12 +3,12 @@
 /**
  * Este archivo es parte del proyecto Escrud.
  * 
- * PHP versions 7 and 8 
+ * PHP versión 8. 
  * 
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.7
+ * @version   GIT:  3.0.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -567,6 +567,7 @@ class HTML
             'BD_USUARIO' => encriptar(Configuracion::config('BD_USUARIO')),
             'BD_CONTRASENA' => encriptar(Configuracion::config('BD_CONTRASENA')),
             'BD_BASEDATOS' => encriptar(Configuracion::config('BD_BASEDATOS')),
+            'BD_DATOS_DSN' => encriptar(Configuracion::config('BD_DATOS_DSN')),
             'IDIOMA' => Configuracion::config('IDIOMA'),
             'RUTA_MODELOS' => encriptar(__DIR__.'/Modelos'),
             'ZONA_HORARIA' => Configuracion::config('ZONA_HORARIA'),

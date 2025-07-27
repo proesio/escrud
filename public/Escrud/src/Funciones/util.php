@@ -3,12 +3,12 @@
 /**
  * Este archivo es parte del proyecto Escrud.
  * 
- * PHP versions 7 and 8 
+ * PHP versión 8. 
  * 
  * @author    Juan Felipe Valencia Murillo  <juanfe0245@gmail.com>
  * @copyright 2020 - presente  Juan Felipe Valencia Murillo
  * @license   https://opensource.org/licenses/MIT  MIT License
- * @version   GIT:  2.6.7
+ * @version   GIT:  3.0.0
  * @link      https://escrud.proes.io
  * @since     Fecha inicio de creación del proyecto  2020-05-31
  */
@@ -107,6 +107,7 @@ function decodificarPeticion($peticion)
     $config['BD_USUARIO'] = desencriptar($config['BD_USUARIO']);
     $config['BD_CONTRASENA'] = desencriptar($config['BD_CONTRASENA']);
     $config['BD_BASEDATOS'] = desencriptar($config['BD_BASEDATOS']);
+    $config['BD_DATOS_DSN'] = desencriptar($config['BD_DATOS_DSN']);
     $config['RUTA_MODELOS'] = desencriptar($config['RUTA_MODELOS']);
 
     $peticion->config = $config;
